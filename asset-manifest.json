@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ExpenSaver/static/css/main.8744448a.chunk.css",
-    "main.js": "/ExpenSaver/static/js/main.80a69075.chunk.js",
-    "main.js.map": "/ExpenSaver/static/js/main.80a69075.chunk.js.map",
+    "main.css": "/ExpenSaver/static/css/main.0f73e9da.chunk.css",
+    "main.js": "/ExpenSaver/static/js/main.6c7ef2da.chunk.js",
+    "main.js.map": "/ExpenSaver/static/js/main.6c7ef2da.chunk.js.map",
     "runtime-main.js": "/ExpenSaver/static/js/runtime-main.e3edf58e.js",
     "runtime-main.js.map": "/ExpenSaver/static/js/runtime-main.e3edf58e.js.map",
-    "static/js/2.7b906718.chunk.js": "/ExpenSaver/static/js/2.7b906718.chunk.js",
-    "static/js/2.7b906718.chunk.js.map": "/ExpenSaver/static/js/2.7b906718.chunk.js.map",
+    "static/js/2.96e64800.chunk.js": "/ExpenSaver/static/js/2.96e64800.chunk.js",
+    "static/js/2.96e64800.chunk.js.map": "/ExpenSaver/static/js/2.96e64800.chunk.js.map",
     "index.html": "/ExpenSaver/index.html",
-    "precache-manifest.4d4c604f0fe8ca7736cdc8010324e89a.js": "/ExpenSaver/precache-manifest.4d4c604f0fe8ca7736cdc8010324e89a.js",
+    "precache-manifest.b2b82317402051d943612e9356fa275c.js": "/ExpenSaver/precache-manifest.b2b82317402051d943612e9356fa275c.js",
     "service-worker.js": "/ExpenSaver/service-worker.js",
-    "static/css/main.8744448a.chunk.css.map": "/ExpenSaver/static/css/main.8744448a.chunk.css.map",
-    "static/js/2.7b906718.chunk.js.LICENSE.txt": "/ExpenSaver/static/js/2.7b906718.chunk.js.LICENSE.txt"
+    "static/css/main.0f73e9da.chunk.css.map": "/ExpenSaver/static/css/main.0f73e9da.chunk.css.map",
+    "static/js/2.96e64800.chunk.js.LICENSE.txt": "/ExpenSaver/static/js/2.96e64800.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e3edf58e.js",
-    "static/js/2.7b906718.chunk.js",
-    "static/css/main.8744448a.chunk.css",
-    "static/js/main.80a69075.chunk.js"
+    "static/js/2.96e64800.chunk.js",
+    "static/css/main.0f73e9da.chunk.css",
+    "static/js/main.6c7ef2da.chunk.js"
   ]
 }
