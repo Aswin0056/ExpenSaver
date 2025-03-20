@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ExpenSaver/static/css/main.0f73e9da.chunk.css",
-    "main.js": "/ExpenSaver/static/js/main.6c7ef2da.chunk.js",
-    "main.js.map": "/ExpenSaver/static/js/main.6c7ef2da.chunk.js.map",
+    "main.css": "/ExpenSaver/static/css/main.78f8a272.chunk.css",
+    "main.js": "/ExpenSaver/static/js/main.92b06a14.chunk.js",
+    "main.js.map": "/ExpenSaver/static/js/main.92b06a14.chunk.js.map",
     "runtime-main.js": "/ExpenSaver/static/js/runtime-main.e3edf58e.js",
     "runtime-main.js.map": "/ExpenSaver/static/js/runtime-main.e3edf58e.js.map",
     "static/js/2.96e64800.chunk.js": "/ExpenSaver/static/js/2.96e64800.chunk.js",
     "static/js/2.96e64800.chunk.js.map": "/ExpenSaver/static/js/2.96e64800.chunk.js.map",
     "index.html": "/ExpenSaver/index.html",
-    "precache-manifest.b2b82317402051d943612e9356fa275c.js": "/ExpenSaver/precache-manifest.b2b82317402051d943612e9356fa275c.js",
+    "precache-manifest.e5569c2c4e10b80a10138a36a23bb27b.js": "/ExpenSaver/precache-manifest.e5569c2c4e10b80a10138a36a23bb27b.js",
     "service-worker.js": "/ExpenSaver/service-worker.js",
-    "static/css/main.0f73e9da.chunk.css.map": "/ExpenSaver/static/css/main.0f73e9da.chunk.css.map",
+    "static/css/main.78f8a272.chunk.css.map": "/ExpenSaver/static/css/main.78f8a272.chunk.css.map",
     "static/js/2.96e64800.chunk.js.LICENSE.txt": "/ExpenSaver/static/js/2.96e64800.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e3edf58e.js",
     "static/js/2.96e64800.chunk.js",
-    "static/css/main.0f73e9da.chunk.css",
-    "static/js/main.6c7ef2da.chunk.js"
+    "static/css/main.78f8a272.chunk.css",
+    "static/js/main.92b06a14.chunk.js"
   ]
 }
