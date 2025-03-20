@@ -14,7 +14,7 @@ const Login = () => {
     setMessage(""); // Clear previous messages
 
     try {
-      const res = await axios.post("http://localhost:5000/login", { email, password });
+      const res = await axios.post("http://localhost:3001/login", { email, password });
 
       console.log("Login Response:", res.data); // Debugging log
 
@@ -65,6 +65,7 @@ const Login = () => {
           <button onClick={() => navigate("/register")} className="register-button">
             Register
           </button>
+          <a href="/ExpenSaver"> <img src={`${process.env.PUBLIC_URL}/left-arrow.png`} alt="logo" className="login-arrow" /> </a>
         </p>
       </div>
     </div>

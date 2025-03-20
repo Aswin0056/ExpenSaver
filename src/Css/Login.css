@@ -85,6 +85,13 @@ body {
   .signup-text a:hover {
     text-decoration: underline;
   }
+
+.login-arrow{
+  height: 30px;
+  width: 30px;
+  margin-top: 30px
+  ;
+}
   
 
 

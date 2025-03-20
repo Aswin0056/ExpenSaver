@@ -15,7 +15,7 @@ const Register = () => {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:5000/register", { 
+      const res = await axios.post("http://localhost:3001/register", { 
         username,  // Sending Username
         email, 
         password 
