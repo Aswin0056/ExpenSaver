@@ -34,6 +34,7 @@ const HomePage = () => {
         {/* Right: App Description */}
         <div className="right-section">
           <h2>Welcome to ExpenSaver</h2>
+          <h3>updated</h3>
           <p>
             <strong>ExpenSaver</strong> is a simple and easy-to-use personal finance tracker designed to help you manage your daily expenses effortlessly.
           </p>

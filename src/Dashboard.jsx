@@ -49,7 +49,8 @@ const Dashboard = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     fetchUserDetails();
     fetchLastExpense();
-  }, []);
+  }
+);
 
   const fetchUserDetails = async () => {
     try {

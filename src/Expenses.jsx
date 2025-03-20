@@ -41,42 +41,36 @@ const Expenses = () => {
   const [editingExpense, setEditingExpense] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
-
-  const fetchExpenses = async () => {
-    const token = localStorage.getItem("authToken");
-  
-    if (!token) {
-      console.error("No auth token found. Redirecting to login...");
-      navigate("/login"); // Redirect if no token
-      return;
-    }
-  
-    try {
-      const res = await axios.get("http://localhost:5000/expenses", {
-        headers: { Authorization: `Bearer ${token}` }, // Ensure token is sent
-      });
-  
-      console.log("Expenses Fetched:", res.data);
-      setExpenses(res.data);
-    } catch (err) {
-      console.error("Error fetching expenses:", err.response?.data?.error || err.message);
-  
-      if (err.response?.status === 401) {
-        console.log("Unauthorized! Redirecting to login...");
-        localStorage.removeItem("authToken"); // Remove invalid token
-        navigate("/login");
-      }
-    }
-  };
-  
+  const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
-    if (token) {
-      fetchExpenses();
-    } else {
+    if (!token) {
+      console.error("No auth token found. Redirecting to login...");
       navigate("/login");
+      return;
     }
-  });
+
+    const fetchExpenses = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/expenses", {
+          headers: { Authorization: `Bearer ${token}` },
+          params: { email: userEmail }, // Ensure user-specific data
+        });
+
+        console.log("Expenses Fetched:", res.data);
+        setExpenses(res.data);
+      } catch (err) {
+        console.error("Error fetching expenses:", err.response?.data?.error || err.message);
+        if (err.response?.status === 401) {
+          console.log("Unauthorized! Redirecting to login...");
+          localStorage.removeItem("authToken");
+          navigate("/login");
+        }
+      }
+    };
+
+    fetchExpenses();
+  }, [navigate, token, userEmail]);
 
   const grandTotal = expenses.reduce(
     (total, expense) => total + expense.amount * (expense.quantity || 1),
@@ -103,7 +97,11 @@ const Expenses = () => {
         editingExpense,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      fetchExpenses();
+      setExpenses((prevExpenses) =>
+        prevExpenses.map((exp) =>
+          exp.id === editingExpense.id ? editingExpense : exp
+        )
+      );
       setEditingExpense(null);
     } catch (err) {
       console.error("Error updating expense:", err.response?.data?.error);
@@ -117,7 +115,7 @@ const Expenses = () => {
       await axios.delete(`http://localhost:5000/delete-expense/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      fetchExpenses();
+      setExpenses((prevExpenses) => prevExpenses.filter((exp) => exp.id !== id));
     } catch (err) {
       console.error("Error deleting expense:", err.response?.data?.error);
     }
