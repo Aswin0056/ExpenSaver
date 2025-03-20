@@ -4,19 +4,22 @@ import { useNavigate } from "react-router-dom";
 import "./Css/Register.css";
 
 const Register = () => {
-  const [username, setUsername] = useState("");  // New Username State
+  const [username, setUsername] = useState(""); // ✅ Username State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  // ✅ Use API URL from environment variables
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:5000/register", { 
-        username,  // Sending Username
+      const res = await axios.post(`${API_URL}/register`, { 
+        username, // ✅ Sending Username
         email, 
         password 
       });
@@ -71,6 +74,7 @@ const Register = () => {
           <button type="submit" className="register-button">Register</button>
         </form>
         {message && <p className="error-message">{message}</p>}
+
         <p className="login-text">
           Already have an account?{" "}
           <button onClick={() => navigate("/login")} className="login-button">

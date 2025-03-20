@@ -9,21 +9,24 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  // ✅ Use API URL from environment variables
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(""); // Clear previous messages
 
     try {
-      const res = await axios.post("http://localhost:5000/login", { email, password });
+      const res = await axios.post(`${API_URL}/login`, { email, password });
 
       console.log("Login Response:", res.data); // Debugging log
 
       if (res.data.token) {
         localStorage.setItem("authToken", res.data.token);
-        localStorage.setItem("userId", res.data.userId); // ✅ Store userId
+        localStorage.setItem("userId", res.data.userId || ""); // ✅ Store userId safely
 
         axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
-        navigate("/dashboard"); // Redirect only if login is successful
+        navigate("/dashboard"); // ✅ Redirect to dashboard on success
       } else {
         setMessage("Login failed, please try again.");
       }
@@ -60,13 +63,22 @@ const Login = () => {
           <button type="submit" className="login-button">Login</button>
         </form>
         {message && <p className="error-message">{message}</p>}
+
         <p className="signup-text">
           Don't have an account?{" "}
           <button onClick={() => navigate("/register")} className="register-button">
             Register
           </button>
-          <a href="/ExpenSaver"> <img src={`${process.env.PUBLIC_URL}/left-arrow.png`} alt="logo" className="login-arrow" /> </a>
         </p>
+
+        {/* ✅ Link to Homepage */}
+        <a href="/" className="home-link">
+          <img 
+            src={`${process.env.PUBLIC_URL}/left-arrow.png`} 
+            alt="Back to Home" 
+            className="login-arrow" 
+          />
+        </a>
       </div>
     </div>
   );
