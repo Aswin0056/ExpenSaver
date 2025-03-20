@@ -14,7 +14,7 @@ const Login = () => {
     setMessage(""); // Clear previous messages
 
     try {
-      const res = await axios.post("http://localhost:3001/login", { email, password });
+      const res = await axios.post("http://localhost:5000/login", { email, password });
 
       console.log("Login Response:", res.data); // Debugging log
 
