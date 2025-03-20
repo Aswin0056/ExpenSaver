@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aedec5d598013da5f887c88b208d544f",
+    "revision": "764f98ceb7614db4366b72a24fec3438",
     "url": "/ExpenSaver/index.html"
   },
   {
-    "revision": "b79c4139de108642c127",
-    "url": "/ExpenSaver/static/css/main.78f8a272.chunk.css"
+    "revision": "91a3e10ae460910b7088",
+    "url": "/ExpenSaver/static/css/main.e5a64c08.chunk.css"
   },
   {
     "revision": "06a9d48b9c4bdd80e837",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ExpenSaver/static/js/2.96e64800.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b79c4139de108642c127",
-    "url": "/ExpenSaver/static/js/main.0e8eeeda.chunk.js"
+    "revision": "91a3e10ae460910b7088",
+    "url": "/ExpenSaver/static/js/main.fbf58537.chunk.js"
   },
   {
     "revision": "17b7044697f8c3f08b62",
