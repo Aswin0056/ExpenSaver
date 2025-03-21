@@ -51,7 +51,8 @@ const Dashboard = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     fetchUserDetails();
     fetchLastExpense();
-  }, []); // ✅ Fixed useEffect infinite loop
+  }
+); // ✅ Fixed useEffect infinite loop
 
   const fetchUserDetails = async () => {
     try {
