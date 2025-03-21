@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Dashboard.css";
 
+const API_BASE_URL = "http://localhost:5000"; // Backend API
+
 const Navbar = ({ handleLogout, username }) => (
   <nav className="navbar">
     <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
@@ -49,12 +51,11 @@ const Dashboard = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     fetchUserDetails();
     fetchLastExpense();
-  }
-);
+  }, []); // ✅ Fixed useEffect infinite loop
 
   const fetchUserDetails = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/user");
+      const res = await axios.get(`${API_BASE_URL}/user`);
       setUsername(res.data.username);
     } catch (err) {
       console.error("Error fetching user details:", err);
@@ -63,7 +64,7 @@ const Dashboard = () => {
 
   const fetchLastExpense = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/last-expense");
+      const res = await axios.get(`${API_BASE_URL}/last-expense`);
       setLastExpense(res.data);
     } catch (err) {
       console.error("Error fetching last expense:", err);
@@ -75,12 +76,17 @@ const Dashboard = () => {
       alert("Title and Amount are required!");
       return;
     }
+
+    console.log("Adding Expense:", { title, amount, quantity });
+
     try {
-      const res = await axios.post("http://localhost:5000/add-expense", {
+      const res = await axios.post(`${API_BASE_URL}/add-expense`, {
         title,
         amount: parseFloat(amount),
         quantity: quantity ? parseInt(quantity) : null,
       });
+
+      console.log("Expense Added Successfully:", res.data);
       setLastExpense(res.data);
       setTitle("");
       setAmount("");
