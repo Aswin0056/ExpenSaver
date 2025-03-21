@@ -30,7 +30,7 @@ function App() {
             {/* Main content with blur effect when loading */}
             <div style={loading ? styles.blurredContent : styles.normalContent}>
                 <Routes>
-                    <Route path="/expensaver.netlify.app" element={<HomePage />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/dashboard" element={<Dashboard />} />
