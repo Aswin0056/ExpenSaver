@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Dashboard.css";
 
-const API_BASE_URL = "http://localhost:5000"; // Backend API
+const API_BASE_URL = "http://localhost:5000";
 
 const Navbar = ({ handleLogout, username }) => (
   <nav className="navbar">
     <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
     <div className="navbar-right">
-      <span className="user-username">{username}</span>
+      <span className="user-username">{username || "User"}</span>
       <button className="logout-button" onClick={handleLogout}>Logout</button>
     </div>
   </nav>
@@ -30,7 +30,7 @@ const Sidebar = () => {
 
 const Footer = () => (
   <footer className="footer">
-    <p>&copy; {new Date().getFullYear()} ExpenSaver. All rights reserved.</p>
+    <p>&copy; {new Date().getFullYear()} ExpenSave. All rights reserved.</p>
   </footer>
 );
 
@@ -41,6 +41,7 @@ const Dashboard = () => {
   const [quantity, setQuantity] = useState("");
   const [username, setUsername] = useState("");
   const [lastExpense, setLastExpense] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -48,27 +49,36 @@ const Dashboard = () => {
       navigate("/login");
       return;
     }
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    fetchUserDetails();
-    fetchLastExpense();
-  }
-); // ✅ Fixed useEffect infinite loop
 
-  const fetchUserDetails = async () => {
+    decodeToken(token);
+    fetchLastExpense(token);
+  }
+);
+
+  const decodeToken = (token) => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/user`);
-      setUsername(res.data.username);
-    } catch (err) {
-      console.error("Error fetching user details:", err);
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setUsername(payload.username);
+    } catch (error) {
+      console.error("Error decoding token:", error);
     }
   };
 
-  const fetchLastExpense = async () => {
+  const fetchLastExpense = async (token) => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/last-expense`);
-      setLastExpense(res.data);
+      const response = await axios.get(`${API_BASE_URL}/last-expense`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setLastExpense(response.data);
     } catch (err) {
-      console.error("Error fetching last expense:", err);
+      if (err.response && err.response.status === 401) {
+        setError("Unauthorized: Invalid token or session expired.");
+        alert("Session expired. Please log in again.");
+        localStorage.removeItem("authToken");
+        navigate("/login");
+      } else {
+        setError("Error fetching last expense.");
+      }
     }
   };
 
@@ -78,22 +88,26 @@ const Dashboard = () => {
       return;
     }
 
-    console.log("Adding Expense:", { title, amount, quantity });
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Unauthorized! Please login.");
+      return;
+    }
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/add-expense`, {
-        title,
-        amount: parseFloat(amount),
-        quantity: quantity ? parseInt(quantity) : null,
-      });
-
-      console.log("Expense Added Successfully:", res.data);
-      setLastExpense(res.data);
+      const res = await axios.post(
+        `${API_BASE_URL}/add-expense`,
+        { title, amount: parseFloat(amount), quantity: quantity ? parseInt(quantity) : null },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      setLastExpense(res.data.expense);
       setTitle("");
       setAmount("");
       setQuantity("");
     } catch (err) {
       console.error("Error adding expense:", err);
+      alert("Failed to add expense. Check console for details.");
     }
   };
 
@@ -108,7 +122,8 @@ const Dashboard = () => {
       <div className="main-content">
         <Sidebar />
         <div className="dashboard-content">
-          <h2>Welcome to Your Dashboard, {username}!</h2>
+          <h2>Welcome to Your Dashboard, {username || "User"}!</h2>
+          {error && <p style={{ color: "red" }}>{error}</p>}
           {lastExpense ? (
             <div className="last-expense">
               <h3>Last Added Expense</h3>
@@ -126,7 +141,7 @@ const Dashboard = () => {
                     <td>{lastExpense.title}</td>
                     <td>₹{lastExpense.amount}</td>
                     <td>{lastExpense.quantity || "-"}</td>
-                    <td>{new Date(lastExpense.created_at).toLocaleString()}</td>
+                    <td>{new Date(lastExpense.date).toLocaleString()}</td>
                   </tr>
                 </tbody>
               </table>
