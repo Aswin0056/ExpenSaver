@@ -41,7 +41,6 @@ const Expenses = () => {
   const [editingExpense, setEditingExpense] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
-  const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
     if (!token) {
@@ -54,7 +53,6 @@ const Expenses = () => {
       try {
         const res = await axios.get("http://localhost:5000/expenses", {
           headers: { Authorization: `Bearer ${token}` },
-          params: { email: userEmail }, // Ensure user-specific data
         });
 
         console.log("Expenses Fetched:", res.data);
@@ -70,7 +68,7 @@ const Expenses = () => {
     };
 
     fetchExpenses();
-  }, [navigate, token, userEmail]);
+  }, [navigate, token]);
 
   const grandTotal = expenses.reduce(
     (total, expense) => total + expense.amount * (expense.quantity || 1),
@@ -172,7 +170,7 @@ const Expenses = () => {
                         <td>
                           {(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}
                         </td>
-                        <td>{new Date(editingExpense.created_at).toLocaleString()}</td>
+                        <td>{new Date(editingExpense?.created_at).toLocaleString()}</td>
                         <td className="action-button">
                           <button className="update-button" onClick={handleUpdate}>Update</button>
                           <button className="cancel-button" onClick={() => setEditingExpense(null)}>Cancel</button>

@@ -7,6 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // ✅ Use API URL from environment variables
@@ -15,24 +16,30 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(""); // Clear previous messages
+    setLoading(true);
 
     try {
       const res = await axios.post(`${API_URL}/login`, { email, password });
 
-      console.log("Login Response:", res.data); // Debugging log
+      console.log("🔍 Login Response:", res.data); // Debugging log
 
-      if (res.data.token) {
-        localStorage.setItem("authToken", res.data.token);
+      if (res.data.accessToken) {
+        localStorage.setItem("authToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken); // ✅ Store refresh token
         localStorage.setItem("userId", res.data.userId || ""); // ✅ Store userId safely
 
-        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.accessToken}`;
+        
+        console.log("✅ Login successful! Redirecting...");
         navigate("/dashboard"); // ✅ Redirect to dashboard on success
       } else {
         setMessage("Login failed, please try again.");
       }
     } catch (err) {
-      console.error("Login Error:", err.response?.data?.error); // Debugging log
+      console.error("🚨 Login Error:", err.response?.data?.error || err.message); // Debugging log
       setMessage(err.response?.data?.error || "Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,8 +67,11 @@ const Login = () => {
               required 
             />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
+
         {message && <p className="error-message">{message}</p>}
 
         <p className="signup-text">
