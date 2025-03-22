@@ -23,21 +23,37 @@ const Login = () => {
 
       console.log("🔍 Login Response:", res.data); // Debugging log
 
-      if (res.data.accessToken) {
+      if (res.status === 200 && res.data.accessToken) {
+        // ✅ Store tokens and user info in localStorage
         localStorage.setItem("authToken", res.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.refreshToken); // ✅ Store refresh token
-        localStorage.setItem("userId", res.data.userId || ""); // ✅ Store userId safely
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        localStorage.setItem("userId", res.data.userId || "");
 
         axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.accessToken}`;
+
+        console.log("✅ Login successful! Redirecting to /dashboard...");
         
-        console.log("✅ Login successful! Redirecting...");
-        navigate("/dashboard"); // ✅ Redirect to dashboard on success
+        // ✅ Try to navigate using `useNavigate()`
+        navigate("/dashboard");
+
+        // ✅ Backup method: Force reload if navigate() fails
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 500);
+
       } else {
         setMessage("Login failed, please try again.");
       }
     } catch (err) {
-      console.error("🚨 Login Error:", err.response?.data?.error || err.message); // Debugging log
-      setMessage(err.response?.data?.error || "Invalid email or password");
+      console.error("🚨 Login Error:", err.response?.status, err.response?.data?.error);
+
+      if (err.response?.status === 401) {
+        setMessage("Incorrect email or password.");
+      } else if (err.response?.status === 500) {
+        setMessage("Server error, try again later.");
+      } else {
+        setMessage("Login failed, please check your connection.");
+      }
     } finally {
       setLoading(false);
     }
