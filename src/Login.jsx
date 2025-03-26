@@ -23,24 +23,18 @@ const Login = () => {
 
       console.log("🔍 Login Response:", res.data); // Debugging log
 
-      if (res.status === 200 && res.data.accessToken) {
+      if (res.status === 200 && res.data.token) {
         // ✅ Store tokens and user info in localStorage
-        localStorage.setItem("authToken", res.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.refreshToken);
-        localStorage.setItem("userId", res.data.userId || "");
+        localStorage.setItem("authToken", res.data.token);
+        localStorage.setItem("userId", res.data.user.id);
 
-        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.accessToken}`;
+        // ✅ Set Axios default Authorization header
+        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
         console.log("✅ Login successful! Redirecting to /dashboard...");
         
-        // ✅ Try to navigate using `useNavigate()`
+        // ✅ Navigate to dashboard
         navigate("/dashboard");
-
-        // ✅ Backup method: Force reload if navigate() fails
-        setTimeout(() => {
-          window.location.href = "/dashboard";
-        }, 500);
-
       } else {
         setMessage("Login failed, please try again.");
       }
