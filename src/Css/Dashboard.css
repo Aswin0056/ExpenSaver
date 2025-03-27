@@ -131,6 +131,12 @@ body {
   z-index: 1000;
 }
 
+.cursive{
+  font-family: cursive;
+}
+.designed{
+  font-size: 10px;
+}
   
   .content {
     display: flex;
@@ -396,6 +402,10 @@ body {
    /* Hide sidebar on very small screens */
     margin-top: 50px;
   }
+  .designed{
+    font-size: 10px;
+    margin-right: 50px;
+  }
 
   .navbar {
     padding: 5px;
@@ -409,9 +419,8 @@ body {
     margin: 0;
   }
 
-  .main-content {
-    margin-left: 0;
-    padding: 10px;
+  .dashboard-container{
+    margin-top: 150px;
   }
 
   .expense-table, .add-expense-table {
