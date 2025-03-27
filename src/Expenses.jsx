@@ -198,6 +198,12 @@ const Expenses = () => {
                     )}
                   </tr>
                 ))}
+                 <tr className="grand-total-row">
+                <td colSpan="3"><strong>Grand Total</strong></td>
+                <td><strong>₹ {grandTotal.toFixed(2)}</strong></td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
