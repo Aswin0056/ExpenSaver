@@ -51,7 +51,7 @@ const Expenses = () => {
 
     const fetchExpenses = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/expenses", {
+        const res = await axios.get("https://es-backend-1.onrender.com/expenses", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -69,7 +69,6 @@ const Expenses = () => {
 
     fetchExpenses();
 
-    // Listen for new expenses added in the dashboard
     const handleExpenseAdded = () => fetchExpenses();
     window.addEventListener("expenseAdded", handleExpenseAdded);
 
@@ -99,7 +98,7 @@ const Expenses = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/update-expense/${editingExpense.id}`,
+        `https://es-backend-1.onrender.com/update-expense/${editingExpense.id}`,
         editingExpense,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -118,7 +117,7 @@ const Expenses = () => {
     if (!window.confirm("Are you sure you want to delete this expense?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/delete-expense/${id}`, {
+      await axios.delete(`https://es-backend-1.onrender.com/delete-expense/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setExpenses((prevExpenses) => prevExpenses.filter((exp) => exp.id !== id));
@@ -199,12 +198,6 @@ const Expenses = () => {
                     )}
                   </tr>
                 ))}
-              <tr className="grand-total-row">
-                <td colSpan="3"><strong>Grand Total</strong></td>
-                <td><strong>₹ {grandTotal.toFixed(2)}</strong></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
         </div>
