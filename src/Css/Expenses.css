@@ -162,4 +162,8 @@ body {
     font-size: 10px;
     width: 100%;
   }
+  .main-content{
+    margin: 80px;
+    padding-top: 100px;
+  }
 }

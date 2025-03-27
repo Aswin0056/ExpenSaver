@@ -159,114 +159,61 @@
 
 /* Footer Styling */
 .footer-home {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    padding: 40px 0;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+  position: relative; /* Ensures it stays at the bottom */
+  bottom: -200px;
   }
   
   .footer-container-home {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    display: flex; /* Arrange sections side by side */
+    justify-content: space-around; /* Space out sections */
+    flex-wrap: wrap; /* Ensure responsiveness */
     max-width: 1200px;
-    width: 90%;
-    margin: 0 auto;
+    margin: auto;
+    padding: 0 20px;
   }
   
   .footer-section-home {
-    flex: 1;
-    min-width: 220px;
-    margin: 10px;
+    flex: 1; /* Equal width sections */
+    min-width: 200px; /* Prevents sections from shrinking too much */
+    padding: 10px;
   }
   
-  .footer-section-home h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    border-bottom: 2px solid rgb(81, 59, 85);;
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-  
-  .footer-section-home p,
-  .footer-section-home a {
-    font-size: 12px;
-    color: #cccccc;
+  .social-icons a {
+    margin: 0 10px;
+    color: white;
+    font-size: 20px;
     text-decoration: none;
   }
   
-  .footer-section-home a:hover {
-    color: rgb(81, 59, 85);
-    text-decoration: underline;
+  .social-icons a:hover {
+    color: #1DA1F2; /* Example hover color */
   }
   
-  /* Social Media Icons */
-  .social-media .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-  }
-  
-  .social-media .social-icons a {
-    color: #ffffff;
-    font-size: 22px;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .social-media .social-icons a:hover {
-    color: rgb(81, 59, 85);;
-  }
   
   /* 🔹 Responsive Design */
  /* 🔹 Responsive Design */
 
-/* For tablets and small desktops */
-@media (max-width: 1024px) {
+ @media screen and (max-width: 480px) {
     .footer-container-home {
       display: flex;
-      flex-wrap: wrap; /* Ensures content wraps if needed */
-      justify-content: center;
-      align-items: center;
-      gap: 20px; /* Adds spacing between elements */
+      flex-direction: row; /* Ensures contents stay in a row */
+      flex-wrap: wrap; /* Wraps elements if they don't fit */
+      justify-content: center; /* Centers content */
+      gap: 10px; /* Adds spacing */
     }
   
     .footer-section-home {
-      text-align: center;
-      flex: 1 1 45%; /* Allows two sections per row */
-      min-width: 300px; /* Prevents sections from shrinking too much */
+      flex: 1; /* Maintain equal widths */
+      min-width: 120px; /* Adjust for smaller screens */
     }
   }
-  
-  /* For mobile devices */
-  @media (max-width: 768px) {
-    .footer-home {
-      padding: 30px 10px;
-    }
-  
-    .footer-container-home {
-      display: flex;
-      flex-direction: column; /* Stacks content vertically */
-      align-items: center;
-      text-align: center;
-    }
-  
-    .footer-section-home {
-      width: 100%;
-    }
-  
-    .social-media .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 10px; /* Adds spacing between icons */
-    }
-  }  
+
+
 
 
 /* Responsive Design */
