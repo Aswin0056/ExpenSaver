@@ -11,6 +11,8 @@ import Dashboard from "./Dashboard";
 import Expenses from "./Expenses";
 import Income from "./Income";
 import HomePage from "./HomePage";
+import Admin from "./admin";
+
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -41,6 +43,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
+          <Route path="/admin" element={<Admin/>} />
         </Routes>
       </div>
     </Router>

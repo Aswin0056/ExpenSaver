@@ -1,0 +1,42 @@
+.admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(81, 59, 85);
+    color: white;
+    padding: 10px;
+  }
+  
+  .logout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .admin-content {
+    margin-top: 20px;
+  }
+  
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .admin-table th {
+    background-color: #333;
+    color: white;
+  }
+  

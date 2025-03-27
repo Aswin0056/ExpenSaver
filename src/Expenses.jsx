@@ -68,6 +68,14 @@ const Expenses = () => {
     };
 
     fetchExpenses();
+
+    // Listen for new expenses added in the dashboard
+    const handleExpenseAdded = () => fetchExpenses();
+    window.addEventListener("expenseAdded", handleExpenseAdded);
+
+    return () => {
+      window.removeEventListener("expenseAdded", handleExpenseAdded);
+    };
   }, [navigate, token]);
 
   const grandTotal = expenses.reduce(

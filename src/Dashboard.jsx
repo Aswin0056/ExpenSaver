@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode"; 
 import "./Css/Dashboard.css";
 
 const API_BASE_URL = "http://localhost:5000";
@@ -44,72 +45,80 @@ const Dashboard = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    decodeToken(token);
-    fetchLastExpense(token);
-  }
-);
-
-  const decodeToken = (token) => {
-    try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      setUsername(payload.username);
-    } catch (error) {
-      console.error("Error decoding token:", error);
-    }
-  };
-
-  const fetchLastExpense = async (token) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/last-expense`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setLastExpense(response.data);
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        setError("Unauthorized: Invalid token or session expired.");
-        alert("Session expired. Please log in again.");
-        localStorage.removeItem("authToken");
+    const checkAuth = () => {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
         navigate("/login");
-      } else {
-        setError("Error fetching last expense.");
+        return;
       }
-    }
-  };
+
+      try {
+        const decoded = jwtDecode(token);
+        setUsername(decoded.username);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        navigate("/login");
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  useEffect(() => {
+    const fetchLastExpense = async () => {
+      const token = localStorage.getItem("authToken");
+      if (!token) return;
+
+      try {
+        const response = await axios.get(`${API_BASE_URL}/dashboard`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setLastExpense(response.data.lastExpense || null);
+      } catch (err) {
+        if (err.response?.status === 401) {
+          alert("Session expired. Please log in again.");
+          localStorage.removeItem("authToken");
+          navigate("/login");
+        } else {
+          setError("Error fetching last expense.");
+        }
+      }
+    };
+
+    fetchLastExpense();
+  }, [navigate]);
 
   const handleAddExpense = async () => {
     if (!title || !amount) {
       alert("Title and Amount are required!");
       return;
     }
-
+  
     const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Unauthorized! Please login.");
       return;
     }
-
+  
     try {
       const res = await axios.post(
-        `${API_BASE_URL}/add-expense`,
-        { title, amount: parseFloat(amount), quantity: quantity ? parseInt(quantity) : null },
+        `${API_BASE_URL}/expenses`,
+        { title, amount: parseFloat(amount), quantity: quantity ? parseInt(quantity) : 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
+  
+      alert("Expense added successfully!");
       setLastExpense(res.data.expense);
       setTitle("");
       setAmount("");
       setQuantity("");
     } catch (err) {
-      console.error("Error adding expense:", err);
+      console.error("Error adding expense:", err.response?.data || err);
       alert("Failed to add expense. Check console for details.");
     }
   };
+  
+  
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -129,12 +138,7 @@ const Dashboard = () => {
               <h3>Last Added Expense</h3>
               <table className="expense-table">
                 <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Amount</th>
-                    <th>Quantity</th>
-                    <th>Date & Time</th>
-                  </tr>
+                  <tr><th>Title</th><th>Amount</th><th>Quantity</th><th>Date & Time</th></tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -146,9 +150,7 @@ const Dashboard = () => {
                 </tbody>
               </table>
             </div>
-          ) : (
-            <p>No expenses added yet.</p>
-          )}
+          ) : (<p>No expenses added yet.</p>)}
           <h3>Add New Expense</h3>
           <div className="expense-form">
             <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />

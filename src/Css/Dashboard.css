@@ -19,7 +19,7 @@ body {
     color: white;
     padding: 15px;
     z-index: 1000;
-    width: 98%;
+    width: 100%;
     position: fixed;
   }
   
@@ -223,6 +223,58 @@ body {
     background-color: blue;
   }
 
+/* ✅ Expense Form Container */
+.expense-form {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgb(238, 233, 233);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.493);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  gap: 1%;
+}
+
+/* ✅ Input Fields */
+.expense-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* ✅ Submit Button */
+.expense-form button {
+  width: 100%;
+  background: rgb(81, 59, 85);
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.expense-form button:hover {
+  background: #0056b3;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+  .expense-form {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .expense-form input, 
+  .expense-form button {
+    font-size: 14px;
+  }
+}
 
 
 
@@ -241,6 +293,7 @@ body {
   .sidebar {
     width: 80px;
     padding: 10px;
+    margin-top: 50px;
   }
 
   .sidebar ul {
@@ -286,6 +339,7 @@ body {
     align-items: center;
     padding: 10px 0;
     z-index: 999;
+    margin-top: 50px;
   }
 
   .sidebar ul {
@@ -339,7 +393,8 @@ body {
 
 @media (max-width: 480px) {
   .sidebar {
-    display: none; /* Hide sidebar on very small screens */
+   /* Hide sidebar on very small screens */
+    margin-top: 50px;
   }
 
   .navbar {

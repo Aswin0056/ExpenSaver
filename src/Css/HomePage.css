@@ -16,7 +16,7 @@
     background-color: rgb(81, 59, 85);
     color: white;
     position: fixed;
-    width: 97%;
+    width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -64,6 +64,7 @@
     font-size: 14px;
     font-weight: bold;
     transition: 0.3s ease-in-out;
+    margin-right: 20px;
 }
 
 .login-btn {
@@ -81,6 +82,31 @@
     transform: translateY(-3px) scale(1.1);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* Download Section */
+.download-section {
+    margin-top: 20px;
+    /* text-align: center; */
+    justify-content: center;
+  }
+  
+  .download-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .download-btn:hover {
+    background-color: #218838;
+  }
+  
 
 /* Main Content Layout */
 .content-container {
@@ -176,7 +202,7 @@
   }
   
   .footer-section-home a:hover {
-    color: rgb(81, 59, 85);;
+    color: rgb(81, 59, 85);
     text-decoration: underline;
   }
   
@@ -199,38 +225,48 @@
   }
   
   /* 🔹 Responsive Design */
-  @media (max-width: 1024px) {
+ /* 🔹 Responsive Design */
+
+/* For tablets and small desktops */
+@media (max-width: 1024px) {
     .footer-container-home {
-      flex-wrap: wrap;
+      display: flex;
+      flex-wrap: wrap; /* Ensures content wraps if needed */
       justify-content: center;
+      align-items: center;
+      gap: 20px; /* Adds spacing between elements */
     }
   
     .footer-section-home {
       text-align: center;
-      flex: 1 1 50%;
+      flex: 1 1 45%; /* Allows two sections per row */
+      min-width: 300px; /* Prevents sections from shrinking too much */
     }
   }
   
+  /* For mobile devices */
   @media (max-width: 768px) {
     .footer-home {
       padding: 30px 10px;
     }
   
     .footer-container-home {
-      flex-direction: column;
+      display: flex;
+      flex-direction: column; /* Stacks content vertically */
       align-items: center;
+      text-align: center;
     }
   
     .footer-section-home {
       width: 100%;
-      text-align: center;
     }
   
     .social-media .social-icons {
+      display: flex;
       justify-content: center;
+      gap: 10px; /* Adds spacing between icons */
     }
-  }
-  
+  }  
 
 
 /* Responsive Design */
@@ -383,3 +419,32 @@
         font-size: 0.8rem;
     }
 }
+
+/* giuvnb */
+
+  @media screen and (max-width: 768px) {
+    /* ✅ Download Button */
+    .download-btn {
+      font-size: 16px;
+      padding: 10px 16px;
+      margin-left: 150px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+  
+    /* ✅ Download Button */
+    .download-btn {
+      font-size: 14px;
+      padding: 8px 12px;
+      margin-left: 150px;
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .download-btn{
+         font-size: 14px;
+      padding: 8px 12px;
+      margin-left: 150px;
+    }
+  }
