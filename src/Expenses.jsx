@@ -140,7 +140,7 @@ const Expenses = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {expenses
                 .filter((expense) =>
                   expense.title.toLowerCase().includes(search.toLowerCase())
@@ -149,6 +149,7 @@ const Expenses = () => {
                   <tr key={expense.id}>
                     {editingExpense?.id === expense.id ? (
                       <>
+                      
                         <td>
                           <input
                             type="text"
@@ -170,6 +171,7 @@ const Expenses = () => {
                             onChange={(e) => handleInputChange(e, "quantity")}
                           />
                         </td>
+                      
                         <td>
                           {(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}
                         </td>

@@ -137,12 +137,36 @@ body {
 
 /* For very small screens (max-width: 480px) */
 @media (max-width: 480px) {
+  .expense-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .sidebar{
+    margin-top: 30px;
+  }
+
+  .expense-table input {
+    width: 80%; /* Prevent input fields from expanding too much */
+    max-width: 100px; /* Limit input field width */
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .expenses-content {
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+  }
+
+  .expenses-container {
+    width: 100%;
+    overflow-x: hidden; /* Prevent unnecessary horizontal scroll */
+  }
+
   .expenses-content {
     padding: 10px;
+    margin-top: 50px;
   }
 
   .expense-table {
-    width: 100%;
     font-size: 12px;
   }
 
@@ -163,7 +187,11 @@ body {
     width: 100%;
   }
   .main-content{
-    margin: 50px;
+    margin-left: 50px;
     padding-top: 50px;
   }
+  .delete-button{
+    margin-left: -1px;
+  }
+
 }

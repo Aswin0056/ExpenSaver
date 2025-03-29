@@ -7,15 +7,38 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-const Navbar = ({ handleLogout, username }) => (
-  <nav className="navbar">
-    <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
-    <div className="navbar-right">
-      <span className="user-username">{username || "User"}</span>
-      <button className="logout-button" onClick={handleLogout}>Logout</button>
-    </div>
-  </nav>
-);
+const Navbar = ({ handleLogout, username }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  return (
+    <nav className="navbar-D">
+      {/* Left Side - Logo */}
+      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo-D" />
+
+      {/* Right Side - Profile Section */}
+      <div className="navbar-right-D">
+        <div className="profile-dropdown">
+          <img 
+            src={`${process.env.PUBLIC_URL}/profile-logo.png`} 
+            alt="Profile" 
+            className="profile-logo"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          />
+          <span className="username" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {username || "User"} ▼
+          </span>
+          
+          {dropdownOpen && (
+            <div className="dropdown-menu">
+              <button onClick={() => alert("Profile Settings")}>Profile Settings</button>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -29,7 +52,6 @@ const Sidebar = () => {
     </div>
   );
 };
-
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -89,20 +111,20 @@ const Dashboard = () => {
       alert("Title and Amount are required!");
       return;
     }
-  
+
     const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Unauthorized! Please login.");
       return;
     }
-  
+
     try {
       const res = await axios.post(
         `${API_BASE_URL}/expenses`,
         { title, amount: parseFloat(amount), quantity: quantity ? parseInt(quantity) : 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
+
       alert("Expense added successfully!");
       setLastExpense(res.data.expense);
       setTitle("");
@@ -113,8 +135,6 @@ const Dashboard = () => {
       alert("Failed to add expense. Check console for details.");
     }
   };
-  
-  
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -156,44 +176,38 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-        {/* Footer Section */}
-                  <footer className="footer-home">
-                    <div className="footer-container-home">
-                      <div className="footer-section-home">
-                        <h4>About</h4>
-                        <p>ExpenSaver is a personal finance tracker helping users manage their daily expenses efficiently.</p>
-                      </div>
-                      
-                      <div className="footer-section-home">
-                        <h4>Contact</h4>
-                        <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
-                        <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
-                      </div>
-                      
-                      <div className="footer-section-home">
-                        <h4>Owner</h4>
-                        <p>Developed by <strong>Aswin</strong></p>
-                      </div>
-                      
-                      <div className="footer-section-home">
-                        <h4>User Guide</h4>
-                        <p>
-                          <a href="/user-guide">Click here to learn how to use ExpenSaver</a>
-                        </p>
-                      </div>
-                      
-                      <div className="footer-section-home social-media">
-                        <h4>Follow Us</h4>
-                        <div className="social-icons">
-                          <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-                          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-                          <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-                          <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </footer>
+
+      {/* Footer Section */}
+      <footer className="footer-home">
+        <div className="footer-container-home">
+          <div className="footer-section-home">
+            <h4>About</h4>
+            <p>ExpenSaver is a personal finance tracker helping users manage their daily expenses efficiently.</p>
+          </div>
+          <div className="footer-section-home">
+            <h4>Contact</h4>
+            <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
+          </div>
+          <div className="footer-section-home">
+            <h4>Owner</h4>
+            <p>Developed by <strong>Aswin</strong></p>
+          </div>
+          <div className="footer-section-home">
+            <h4>User Guide</h4>
+            <p><a href="/user-guide">Click here to learn how to use ExpenSaver</a></p>
+          </div>
+          <div className="footer-section-home social-media">
+            <h4>Follow Us</h4>
+            <div className="social-icons">
+              <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+              <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+              <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

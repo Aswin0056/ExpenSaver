@@ -11,37 +11,101 @@ body {
   }
   
   /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(81, 59, 85);
-    color: white;
-    padding: 15px;
-    z-index: 1000;
-    width: 100%;
-    position: fixed;
-  }
-  
-  .navbar-title {
-    font-size: 20px;
-  }
-
-  
-.user-username{
-  font-size: 1rem;
-  font-family: cursive;
-  margin-left:-150px ;
-  margin-right: 25px;
+/* Navbar Styling */
+.navbar-D {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgb(81, 59, 85);/* Dark navy background */
+  color: white;
 }
+
+/* Logo (Left side) */
+.logo-D {
+  height: 70px;
+  width: 80px;
+  z-index: 1000;
+  margin-left: 20px;
+}
+
+/* Right Side - Profile Section */
+.navbar-right-D {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: -20px;
+}
+
+/* Profile Logo */
+.profile-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  margin-right: -15px;
+}
+
+.profile-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Username */
+.username {
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Dropdown Menu */
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2c3e50;
+  transition: background 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
 
   /* Sidebar */
   .sidebar {
     width: 120px;
     background-color: rgb(81, 59, 85);
-    height: 100vh;
+    height: 800px;
     padding: 20px;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     color: #ddd;
@@ -400,28 +464,37 @@ body {
 @media (max-width: 480px) {
   .sidebar {
    /* Hide sidebar on very small screens */
-    margin-top: 50px;
+    padding-top: 30px;
+    position: absolute;
   }
   .designed{
     font-size: 10px;
     margin-right: 50px;
   }
-
+  .dashboard-content{
+    margin-left: -50px;
+  }
+  
   .navbar {
     padding: 5px;
     font-size: 10px;
     flex-direction: column;
     text-align: center;
+   
   }
 
-  .user-username {
-    font-size: 0.7rem;
+  .user-name {
+    font-size: 0.9rem;
     margin: 0;
+    font-family: cursive;
+  }
+
+  .logo{
+    margin-left: -20px;
   }
   
   .dashboard-container h2{
     font-size: 14px;
-    margin-top: 60px;
   }
 
   .expense-form {
@@ -429,7 +502,7 @@ body {
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin: 20px auto;
+    margin-left: -15px;
     padding: 15px;
     background: #f8f9fa;
     border-radius: 10px;
@@ -468,5 +541,8 @@ body {
   .footer {
     font-size: 10px;
     padding: 8px;
+  }
+  .sidebar{
+    margin-top: 0px;
   }
 }
