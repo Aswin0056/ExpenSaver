@@ -5,14 +5,13 @@ import { jwtDecode } from "jwt-decode";
 import "./Css/Admin.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-const ADMIN_EMAIL = "admin@gmail.com"; // Set your admin Gmail here
+const ADMIN_EMAIL = "admin@gmail.com";
 
 const Admin = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
-  // Fetch all users with expenses
   const fetchAllUsers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -45,20 +44,17 @@ const Admin = () => {
 
     try {
       const decoded = jwtDecode(token);
-      
-      // ✅ Check for admin email instead of username
       if (decoded.email !== ADMIN_EMAIL) {
         alert("Access Denied: Admins only.");
         navigate("/dashboard");
         return;
       }
-
       fetchAllUsers();
     } catch (error) {
       console.error("Error decoding token:", error);
       navigate("/login");
     }
-  }, [fetchAllUsers, navigate]); // ✅ Included fetchAllUsers in dependencies
+  }, [fetchAllUsers, navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -77,7 +73,7 @@ const Admin = () => {
         <table className="admin-table">
           <thead>
             <tr>
-              <th>Username</th>
+              <th>Email</th>
               <th>Title</th>
               <th>Amount</th>
               <th>Quantity</th>
@@ -87,22 +83,13 @@ const Admin = () => {
           <tbody>
             {users.length > 0 ? (
               users.map((user, index) => (
-                user.expenses.length > 0 ? (
-                  user.expenses.map((expense, i) => (
-                    <tr key={`${index}-${i}`}>
-                      {i === 0 && <td rowSpan={user.expenses.length}>{user.username}</td>}
-                      <td>{expense.title}</td>
-                      <td>₹{expense.amount}</td>
-                      <td>{expense.quantity || "-"}</td>
-                      <td>{new Date(expense.date).toLocaleString()}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr key={index}>
-                    <td>{user.username}</td>
-                    <td colSpan="4">No expenses found</td>
-                  </tr>
-                )
+                <tr key={index}>
+                  <td>{user.email}</td>
+                  <td>{user.title || "N/A"}</td>
+                  <td>₹{user.amount || "N/A"}</td>
+                  <td>{user.quantity || "-"}</td>
+                  <td>{user.date ? new Date(user.date).toLocaleString() : "N/A"}</td>
+                </tr>
               ))
             ) : (
               <tr><td colSpan="5">No users or expenses found.</td></tr>

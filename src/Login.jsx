@@ -12,6 +12,7 @@ const Login = () => {
 
   // ✅ Use API URL from environment variables
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const ADMIN_EMAIL = "admin@gmail.com"; // ✅ Define admin email
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,14 +28,19 @@ const Login = () => {
         // ✅ Store tokens and user info in localStorage
         localStorage.setItem("authToken", res.data.token);
         localStorage.setItem("userId", res.data.user.id);
+        localStorage.setItem("userEmail", res.data.user.email);
 
         // ✅ Set Axios default Authorization header
         axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
-        console.log("✅ Login successful! Redirecting to /dashboard...");
-        
-        // ✅ Navigate to dashboard
-        navigate("/dashboard");
+        console.log("✅ Login successful!");
+
+        // ✅ Redirect based on user role
+        if (res.data.user.email === ADMIN_EMAIL) {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
         setMessage("Login failed, please try again.");
       }
