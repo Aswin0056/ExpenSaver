@@ -4,8 +4,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "./Css/Admin.css";
 
-const API_BASE_URL = "http://localhost:5000";
-const OWNER_USERNAME = "admin"; // Change this to match the actual admin username
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const ADMIN_EMAIL = "admin@gmail.com"; // Set your admin Gmail here
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -45,11 +45,14 @@ const Admin = () => {
 
     try {
       const decoded = jwtDecode(token);
-      if (decoded.username !== OWNER_USERNAME) {
+      
+      // ✅ Check for admin email instead of username
+      if (decoded.email !== ADMIN_EMAIL) {
         alert("Access Denied: Admins only.");
         navigate("/dashboard");
         return;
       }
+
       fetchAllUsers();
     } catch (error) {
       console.error("Error decoding token:", error);

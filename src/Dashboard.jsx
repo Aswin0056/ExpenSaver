@@ -191,7 +191,7 @@ const Dashboard = () => {
                           <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
                         </div>
                       </div>
-                      <p className="designed">Designed by <strong className="cursive">Lishoni Lenin</strong></p>
+                      
                     </div>
                   </footer>
     </div>
