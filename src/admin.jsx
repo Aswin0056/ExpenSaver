@@ -10,8 +10,10 @@ const ADMIN_EMAIL = "admin@gmail.com";
 const Admin = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [comments, setComments] = useState([]);
   const [error, setError] = useState("");
 
+  // Fetch Users and Expenses
   const fetchAllUsers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -25,13 +27,25 @@ const Admin = () => {
       });
       setUsers(response.data);
     } catch (err) {
-      if (err.response?.status === 401) {
-        alert("Session expired. Please log in again.");
-        localStorage.removeItem("authToken");
-        navigate("/login");
-      } else {
-        setError("Error fetching users and expenses.");
-      }
+      setError("Error fetching users and expenses.");
+    }
+  }, [navigate]);
+
+  // Fetch Comments
+  const fetchAllComments = useCallback(async () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${API_BASE_URL}/admin/comments`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setComments(response.data);
+    } catch (err) {
+      setError("Error fetching comments.");
     }
   }, [navigate]);
 
@@ -50,23 +64,21 @@ const Admin = () => {
         return;
       }
       fetchAllUsers();
+      fetchAllComments(); // Fetch comments when admin logs in
     } catch (error) {
-      console.error("Error decoding token:", error);
       navigate("/login");
     }
-  }, [fetchAllUsers, navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/login");
-  };
+  }, [fetchAllUsers, fetchAllComments, navigate]);
 
   return (
     <div className="admin-container">
       <nav className="navbar">
         <h2>Admin Panel</h2>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+        <button onClick={() => localStorage.removeItem("authToken") || navigate("/login")} className="logout-admin">
+          Logout
+        </button>
       </nav>
+
       <div className="admin-content">
         <h3>All Users and Their Expenses</h3>
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -93,6 +105,28 @@ const Admin = () => {
               ))
             ) : (
               <tr><td colSpan="5">No users or expenses found.</td></tr>
+            )}
+          </tbody>
+        </table>
+
+        <h3>User Comments</h3>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Comment</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comments.length > 0 ? (
+              comments.map((comment, index) => (
+                <tr key={index}>
+                  <td>{comment.text}</td>
+                  <td>{new Date(comment.date).toLocaleString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr><td colSpan="2">No comments available.</td></tr>
             )}
           </tbody>
         </table>

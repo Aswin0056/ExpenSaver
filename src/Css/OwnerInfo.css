@@ -1,0 +1,84 @@
+/* Owner Info Page Styles */
+.owner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.owner-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+}
+
+.owner-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.owner-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.owner-bio {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    font-size: 16px;
+    color: #666;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.social-links{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.social-links a {
+    margin: 0 10px;
+    font-size: 24px;
+    color: rgb(100, 75, 105);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #0056b3;
+}
+
+.SD-L {
+    font-family: cursive
+}
+
+.SD-P{
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000000ab;
+}

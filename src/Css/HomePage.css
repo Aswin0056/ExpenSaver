@@ -156,6 +156,56 @@
     margin-bottom: 8px;
 }
 
+.comment-section {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .comment-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .comment-submit {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: rgb(81, 59, 85);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .comment-submit:hover {
+    background-color: rgb(100, 75, 105);
+  }
+  
+  .comments-container {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .comment-item {
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-date {
+    display: block;
+    font-size: 12px;
+    color: gray;
+    margin-top: 5px;
+  }
+  
+
 
 /* Footer Styling */
 .footer-home {
@@ -194,6 +244,10 @@
     color: #1DA1F2; /* Example hover color */
   }
   
+  .more-info{
+    color: white;
+    text-decoration: none;
+  }
   
   /* 🔹 Responsive Design */
  /* 🔹 Responsive Design */

@@ -12,6 +12,7 @@ import Expenses from "./Expenses";
 import Income from "./Income";
 import HomePage from "./HomePage";
 import Admin from "./admin";
+import OwnerInfo from "./OwnerInfo";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
           <Route path="/admin" element={<Admin/>} />
+          <Route path="/ownerinfo" element={<OwnerInfo/>} />
         </Routes>
       </div>
     </Router>
