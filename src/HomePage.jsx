@@ -13,9 +13,9 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [gmail, setGmail] = useState("");  // New state for Gmail input
   const [error, setError] = useState(null);
 
-  // Fetch comments from the backend
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -30,20 +30,30 @@ const HomePage = () => {
   }, []);
 
   const handleCommentSubmit = async () => {
+    if (!gmail.includes("@") || !gmail.includes(".")) {
+      alert("Please enter a valid Gmail address.");
+      return;
+    }
     if (newComment.trim() === "") {
       alert("Comment cannot be empty!");
       return;
     }
-
+  
+    const commentData = { gmail, text: newComment };
+    console.log("Sending data:", commentData); // Debugging
+  
     try {
-      const response = await axios.post(`${API_BASE_URL}/comments`, { text: newComment });
-      setComments(prevComments => [...prevComments, response.data]); // Update UI
-      setNewComment(""); // Clear input
+      const response = await axios.post(`${API_BASE_URL}/comments`, commentData);
+      console.log("Response:", response.data);
+      setComments([...comments, response.data]); // Update UI
+      setNewComment("");
+      setGmail("");
     } catch (error) {
+      console.error("Error submitting comment:", error.response ? error.response.data : error.message);
       setError("Error submitting comment.");
-      console.error("Error submitting comment:", error);
     }
   };
+  
 
   return (
     <div className="homepage-container">
@@ -82,8 +92,16 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Comment Section */}
       <div className="comment-section">
         <h3>Leave a Comment</h3>
+        <input
+          type="email"
+          className="gmail-input"
+          placeholder="Enter your Gmail"
+          value={gmail}
+          onChange={(e) => setGmail(e.target.value)}
+        />
         <textarea
           className="comment-input"
           placeholder="Write your comment..."
@@ -99,8 +117,9 @@ const HomePage = () => {
           {comments.length === 0 ? (
             <p>No comments yet. Be the first to comment!</p>
           ) : (
-            comments.map((comment) => (
-              <div key={comment._id} className="comment-item">
+            comments.map((comment, index) => (
+              <div key={index} className="comment-item">
+                <p><strong>{comment.gmail}</strong></p>
                 <p>{comment.text}</p>
                 <span className="comment-date">{new Date(comment.date).toLocaleString()}</span>
               </div>
