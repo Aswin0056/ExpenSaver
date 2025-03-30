@@ -9,7 +9,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const Navbar = ({ handleLogout, username }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <nav className="navbar-D">
       {/* Left Side - Logo */}
@@ -30,7 +30,7 @@ const Navbar = ({ handleLogout, username }) => {
           
           {dropdownOpen && (
             <div className="dropdown-menu">
-              <button onClick={() => alert("Profile Settings")}>Profile Settings</button>
+              <button onClick={() => navigate("/profilesettings")}>Profile Settings</button>
               <button onClick={handleLogout}>Logout</button>
             </div>
           )}

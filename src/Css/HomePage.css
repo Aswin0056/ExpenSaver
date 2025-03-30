@@ -205,7 +205,20 @@
     margin-top: 5px;
   }
   
-
+  .gmail-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .gmail-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
 
 /* Footer Styling */
 .footer-home {

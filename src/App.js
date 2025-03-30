@@ -13,6 +13,7 @@ import Income from "./Income";
 import HomePage from "./HomePage";
 import Admin from "./admin";
 import OwnerInfo from "./OwnerInfo";
+import ProfileSettings from "./ProfileSettings";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/income" element={<Income />} />
           <Route path="/admin" element={<Admin/>} />
           <Route path="/ownerinfo" element={<OwnerInfo/>} />
+          <Route path="/profilesettings" element={<ProfileSettings/>} />
         </Routes>
       </div>
     </Router>

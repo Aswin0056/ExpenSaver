@@ -92,6 +92,10 @@ const Income = ({ expenses = {} }) => {
           </div>
         )}
       </div>
+      
+      <div className="under-construction">
+  🚧 This section is currently under construction. Stay tuned for updates! 🚀
+</div>
 
       <div className="main-content">
         <Sidebar />

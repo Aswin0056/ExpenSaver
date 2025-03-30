@@ -93,6 +93,20 @@
     color: #1DA1F2; /* Example hover color */
   }
   
+  .under-construction {
+    text-align: center;
+    background: #ffcc00;
+    color: #333;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
   
   /* 🔹 Responsive Design */
  /* 🔹 Responsive Design */

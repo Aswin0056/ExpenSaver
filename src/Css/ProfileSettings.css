@@ -1,0 +1,40 @@
+.profile-settings-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile-image-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .username-section {
+    margin-bottom: 20px;
+  }
+  
+  .username-section input {
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .save-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
