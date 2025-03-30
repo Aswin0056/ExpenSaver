@@ -186,6 +186,14 @@
     margin-top: 250px;
     padding: 10px;
   }
+  .SC-Nav{
+     display: flex;
+  }
+  .calendar-icon {
+    font-size: 20px; /* Adjust as needed */
+    cursor: pointer;
+    margin: 5%;
+  }
 
   .input-income select,
   .input-income input {

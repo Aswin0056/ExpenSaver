@@ -25,7 +25,7 @@ const Navbar = ({ handleLogout, username }) => {
             onClick={() => setDropdownOpen(!dropdownOpen)}
           />
           <span className="username" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            {username || "User"} ▼
+            {username || "User"} 
           </span>
           
           {dropdownOpen && (

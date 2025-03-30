@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Css/HomePage.css";
 import { 
   FaUserPlus, FaSignInAlt, FaPlusCircle, FaEye, FaTasks, 
-  FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaDownload 
+  FaFacebook, FaTwitter, FaInstagram, FaLinkedin,
 } from "react-icons/fa";
 
 const HomePage = () => {
@@ -51,13 +51,13 @@ const HomePage = () => {
           <p>Start tracking your expenses today and take control of your finances!</p>
 
           {/* 🔽 Download Button 🔽 */}
-          <div className="download-section">
+          {/* <div className="download-section">
             <h3>Download ExpenSaver App</h3>
             <p>Get the ExpenSaver app for a better experience on your mobile device.</p>
             <button className="download-btn">
               <FaDownload /> Download Now
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
