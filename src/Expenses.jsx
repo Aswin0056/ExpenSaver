@@ -35,6 +35,9 @@ const Expenses = () => {
   const [search, setSearch] = useState("");
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
+  const [filter, setFilter] = useState("all");
+  const [filterDate, setFilterDate] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
 
@@ -122,6 +125,20 @@ const Expenses = () => {
     }
   };
 
+  const filteredExpenses = expenses.filter((expense) => {
+    const expenseDate = new Date(expense.created_at);
+    if (filter === "date" && filterDate) {
+      return expenseDate.toISOString().split("T")[0] === filterDate;
+    }
+    if (filter === "month" && filterMonth) {
+      return (
+        expenseDate.getFullYear() === parseInt(filterMonth.split("-")[0]) &&
+        expenseDate.getMonth() + 1 === parseInt(filterMonth.split("-")[1])
+      );
+    }
+    return true;
+  });
+
   return (
     <div className="expenses-container">
       <Navbar search={search} setSearch={setSearch} />
@@ -129,6 +146,29 @@ const Expenses = () => {
         <Sidebar />
         <div className="expenses-content">
           <h2>Expense History</h2>
+          
+          <div className="filter-bar">
+            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+              <option value="all">All</option>
+              <option value="date">Filter by Date</option>
+              <option value="month">Filter by Month</option>
+            </select>
+            {filter === "date" && (
+              <input
+                type="date"
+                value={filterDate}
+                onChange={(e) => setFilterDate(e.target.value)}
+              />
+            )}
+            {filter === "month" && (
+              <input
+                type="month"
+                value={filterMonth}
+                onChange={(e) => setFilterMonth(e.target.value)}
+              />
+            )}
+          </div>
+          
           <table className="expense-table">
             <thead>
               <tr>
@@ -140,12 +180,9 @@ const Expenses = () => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody >
-              {expenses
-                .filter((expense) =>
-                  expense.title.toLowerCase().includes(search.toLowerCase())
-                )
-                .map((expense) => (
+            <tbody>
+  {filteredExpenses.map((expense) => (
+
                   <tr key={expense.id}>
                     {editingExpense?.id === expense.id ? (
                       <>
