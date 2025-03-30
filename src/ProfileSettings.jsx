@@ -29,9 +29,12 @@ const ProfileSettings = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setPreviewImage(response.data.profileImage);
+        if (response.data.profileImage) {
+          setPreviewImage(response.data.profileImage);
+        }
       } catch (error) {
         console.error("Error fetching profile data:", error);
+        setError("Failed to load profile data.");
       }
     };
 
@@ -60,7 +63,7 @@ const ProfileSettings = () => {
     }
 
     try {
-      await axios.put(`${API_BASE_URL}/profile`, formData, {
+      const response = await axios.put(`${API_BASE_URL}/profile`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -68,6 +71,9 @@ const ProfileSettings = () => {
       });
 
       alert("Profile updated successfully!");
+      if (response.data.profileImage) {
+        setPreviewImage(response.data.profileImage);
+      }
       navigate("/dashboard");
     } catch (err) {
       console.error("Error updating profile:", err);
