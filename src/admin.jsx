@@ -74,7 +74,7 @@ const Admin = () => {
     <div className="admin-container">
       <nav className="navbar">
         <h2>Admin Panel</h2>
-        <button onClick={() => localStorage.removeItem("authToken") || navigate("/login")} className="logout-admin">
+        <button onClick={() => { localStorage.removeItem("authToken"); navigate("/login"); }} className="logout-admin">
           Logout
         </button>
       </nav>
@@ -136,3 +136,4 @@ const Admin = () => {
 };
 
 export default Admin;
+

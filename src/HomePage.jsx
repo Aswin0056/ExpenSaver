@@ -13,26 +13,35 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [error, setError] = useState(null);
 
   // Fetch comments from the backend
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/comments`)
-      .then(response => setComments(response.data))
-      .catch(error => console.error("Error fetching comments:", error));
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/comments`);
+        setComments(response.data);
+      } catch (error) {
+        setError("Error fetching comments.");
+        console.error("Error fetching comments:", error);
+      }
+    };
+    fetchComments();
   }, []);
 
   const handleCommentSubmit = async () => {
     if (newComment.trim() === "") {
-        alert("Comment cannot be empty!");
-        return;
+      alert("Comment cannot be empty!");
+      return;
     }
 
     try {
-        const response = await axios.post(`${API_BASE_URL}/comments`, { text: newComment });
-        setComments([...comments, response.data]); // Update UI
-        setNewComment(""); // Clear input
+      const response = await axios.post(`${API_BASE_URL}/comments`, { text: newComment });
+      setComments(prevComments => [...prevComments, response.data]); // Update UI
+      setNewComment(""); // Clear input
     } catch (error) {
-        alert("Error submitting comment");
+      setError("Error submitting comment.");
+      console.error("Error submitting comment:", error);
     }
   };
 
@@ -84,6 +93,7 @@ const HomePage = () => {
         <button className="comment-submit" onClick={handleCommentSubmit}>
           <FaPaperPlane /> Submit
         </button>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="comments-container">
           {comments.length === 0 ? (
@@ -113,7 +123,7 @@ const HomePage = () => {
           <div className="footer-section-home">
             <h4>Owner</h4>
             <p>Developed by <strong>Aswin</strong></p>
-            <h5><a  className="more-info" href="/ownerinfo">More Info</a></h5>
+            <h5><a className="more-info" href="/ownerinfo">More Info</a></h5>
           </div>
           <div className="footer-section-home">
             <h4>User Guide</h4>
