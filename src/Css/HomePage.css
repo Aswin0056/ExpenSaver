@@ -164,7 +164,7 @@
   }
   
   .comment-input {
-    width: 100%;
+    width: 90%;
     height: 100px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -206,7 +206,7 @@
   }
   
   .gmail-input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;

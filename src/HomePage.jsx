@@ -141,7 +141,7 @@ const HomePage = () => {
           </div>
           <div className="footer-section-home">
             <h4>Owner</h4>
-            <p>Developed by <strong>Aswin</strong></p>
+            <p>Developed by <strong style={{"fontFamily":'cursive'}}>Aswin</strong></p>
             <h5><a className="more-info" href="/ownerinfo">More Info</a></h5>
           </div>
           <div className="footer-section-home">

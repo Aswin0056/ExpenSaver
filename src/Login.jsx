@@ -106,6 +106,7 @@ const Login = () => {
           />
         </a>
       </div>
+      <h6 style={{"fontFamily":'cursive', "color":'grey'}}>Developed By Aswin</h6>
     </div>
   );
 };
