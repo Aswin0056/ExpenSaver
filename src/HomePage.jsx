@@ -62,9 +62,9 @@ const HomePage = () => {
         <div className="logo-container">
           <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="ExpenSaver Logo" className="homepage-logo" />
         </div>
-        <div className="search-container">
+        {/* <div className="search-container">
           <input type="text" placeholder="Search..." className="search-bar" />
-        </div>
+        </div> */}
         <div className="nav-buttons">
           <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
           <button className="register-btn" onClick={() => navigate("/register")}>Register</button>

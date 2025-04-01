@@ -16,7 +16,7 @@
     background-color: rgb(81, 59, 85);
     color: white;
     position: absolute;
-    width: 100%;
+    width: 98.5%;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -406,7 +406,8 @@
 /* Extra Small Devices */
 @media screen and (max-width: 480px) {
     .navbar {
-        padding: 5px;
+        height: 85px;
+        width: 97.3%;
     }
 
     .search-bar {
@@ -417,7 +418,10 @@
 
     .nav-buttons {
         display: flex;
-        gap: 5px;
+        margin-left: 18px;
+        gap: 3px;
+        margin-bottom: 10px;
+        
     }
 
     .login-btn,
