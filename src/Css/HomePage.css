@@ -406,7 +406,7 @@
 /* Extra Small Devices */
 @media screen and (max-width: 480px) {
     .navbar {
-        height: 85px;
+        height: 95px;
         width: 97.3%;
     }
 
@@ -416,6 +416,7 @@
         padding: 6px;
     }
 
+    
     .nav-buttons {
         display: flex;
         margin-left: 18px;
