@@ -60,7 +60,7 @@ const Dashboard = () => {
   const [quantity, setQuantity] = useState("");
   const [username, setUsername] = useState("");
   const [lastExpense, setLastExpense] = useState(null);
-  const [error, setError] = useState("");
+  const [error] = useState("");
 
   useEffect(() => {
     const checkAuth = () => {
@@ -82,30 +82,37 @@ const Dashboard = () => {
     checkAuth();
   }, [navigate]);
 
-  useEffect(() => {
-    const fetchLastExpense = async () => {
-      const token = localStorage.getItem("authToken");
-      if (!token) return;
+  const token = localStorage.getItem("authToken");
 
-      try {
-        const response = await axios.get(`${API_BASE_URL}/dashboard`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setLastExpense(response.data.lastExpense || null);
-      } catch (err) {
-        if (err.response?.status === 401) {
-          alert("Session expired. Please log in again.");
-          localStorage.removeItem("authToken");
-          navigate("/login");
-        } else {
-          setError("Error fetching last expense.");
-        }
+  const fetchLastExpense = async () => {
+    if (!token) {
+      console.error("No token found. User not authenticated.");
+      return;
+    }
+  
+    try {
+      console.log("Fetching last expense...");
+      const response = await axios.get(`${API_BASE_URL}/dashboard`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      console.log("Last Expense Response:", response.data);
+      if (response.data.lastExpense) {
+        setLastExpense(response.data.lastExpense);
+      } else {
+        console.warn("No expenses found for this user.");
+        setLastExpense(null);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching last expense:", error.response?.data || error);
+    }
+  };
+  
+  useEffect(() => {
     fetchLastExpense();
-  }, [navigate]);
-
+  }
+);  // Fetch once when the component mounts
+  
   const handleAddExpense = async () => {
     if (!title || !amount) {
       alert("Title and Amount are required!");
