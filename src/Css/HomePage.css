@@ -204,6 +204,13 @@
     color: gray;
     margin-top: 5px;
   }
+
+  .users-logo{
+    height: 20px;
+    width: auto;
+    margin-right: 5px;
+    margin-bottom: -5px;
+  }
   
   .gmail-input {
     width: 90%;

@@ -13,7 +13,8 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [gmail, setGmail] = useState("");  // New state for Gmail input
+  const [name, setName] = useState("");  // New state for name input
+  const [email, setEmail] = useState("");  // New state for email input
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -34,16 +35,12 @@ const HomePage = () => {
   
 
   const handleCommentSubmit = async () => {
-    if (!gmail.includes("@") || !gmail.includes(".")) {
-      alert("Please enter a valid Gmail address.");
-      return;
-    }
-    if (newComment.trim() === "") {
-      alert("Comment cannot be empty!");
+    if (!name || !email || !newComment.trim()) {
+      alert("Please fill in all fields.");
       return;
     }
   
-    const commentData = { gmail, text: newComment };
+    const commentData = { name, email, text: newComment };
     console.log("Sending data:", commentData); // Debugging
   
     try {
@@ -51,13 +48,13 @@ const HomePage = () => {
       console.log("Response:", response.data);
       setComments([...comments, response.data]); // Update UI
       setNewComment("");
-      setGmail("");
+      setName("");
+      setEmail("");
     } catch (error) {
       console.error("Error submitting comment:", error.response ? error.response.data : error.message);
       setError("Error submitting comment.");
     }
   };
-  
 
   return (
     <div className="homepage-container">
@@ -100,11 +97,18 @@ const HomePage = () => {
       <div className="comment-section">
         <h3>Leave a Comment</h3>
         <input
+          type="text"
+          className="gmail-input"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
           type="email"
           className="gmail-input"
-          placeholder="Enter your Gmail"
-          value={gmail}
-          onChange={(e) => setGmail(e.target.value)}
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <textarea
           className="comment-input"
@@ -123,9 +127,9 @@ const HomePage = () => {
           ) : (
             comments.map((comment, index) => (
               <div key={index} className="comment-item">
-                <p><strong>{comment.gmail}</strong></p>
+                <p><img src={`${process.env.PUBLIC_URL}/users-logo.png`} alt="logo" className="users-logo" /><strong>{comment.name}</strong></p>
                 <p>{comment.text}</p>
-                <span className="comment-date">{new Date(comment.date).toLocaleString()}</span>
+                <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
               </div>
             ))
           )}
