@@ -19,15 +19,19 @@ const HomePage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
+        console.log("Fetching comments from:", `${API_BASE_URL}/comments`); // Debugging
         const response = await axios.get(`${API_BASE_URL}/comments`);
+        console.log("Fetched comments:", response.data); // Debugging
         setComments(response.data);
       } catch (error) {
-        setError("Error fetching comments.");
         console.error("Error fetching comments:", error);
+        setError("Error fetching comments.");
       }
     };
+  
     fetchComments();
   }, []);
+  
 
   const handleCommentSubmit = async () => {
     if (!gmail.includes("@") || !gmail.includes(".")) {
