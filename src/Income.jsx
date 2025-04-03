@@ -12,7 +12,7 @@ const Navbar = ({ search, setSearch, selectedDate, setSelectedDate }) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar-I">
       <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
       <div className="SC-Nav">
       <input

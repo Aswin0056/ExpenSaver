@@ -5,8 +5,8 @@ import "./Css/Expenses.css";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Navbar = ({ search, setSearch }) => (
-  <nav className="navbar">
-    <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
+  <nav className="navbar-E">
+    <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo-E" />
     <input
       type="text"
       placeholder="Search expenses..."
@@ -20,7 +20,7 @@ const Navbar = ({ search, setSearch }) => (
 const Sidebar = () => {
   const navigate = useNavigate();
   return (
-    <div className="sidebar">
+    <div className="sidebar-E">
       <ul>
         <li onClick={() => navigate("/dashboard")}>Dashboard</li>
         <li onClick={() => navigate("/expenses")}>Expenses</li>

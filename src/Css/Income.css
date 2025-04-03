@@ -207,6 +207,8 @@
     font-size: 20px; /* Adjust as needed */
     cursor: pointer;
     margin: 5%;
+    /* margin-left: 50px ; */
+    z-index: 1000;
   }
 
   .input-income select,
@@ -243,5 +245,12 @@
 
   .social-icons a {
     font-size: 16px;
+  }
+  .navbar-I {
+    padding: 5px;
+    font-size: 10px;
+    flex-direction: column;
+    text-align: center;
+   
   }
 }

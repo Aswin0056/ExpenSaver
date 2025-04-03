@@ -19,7 +19,7 @@ const OwnerInfo = () => {
             Feel free to reach out for collaborations, feedback, or just to
             connect!
           </p>
-          <p className="SD-P"><strong className="SD-L">Lishoni Lenin </strong>: Supporting Director</p>
+          {/* <p className="SD-P"><strong className="SD-L">Lishoni Lenin </strong>: Supporting Director</p> */}
         </div>
       </div>
 

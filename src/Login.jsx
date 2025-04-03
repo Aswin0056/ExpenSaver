@@ -12,7 +12,7 @@ const Login = () => {
 
   // ✅ Use API URL from environment variables
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-  const ADMIN_EMAIL = "admin@gmail.com"; // ✅ Define admin email
+  const ADMIN_EMAIL = "expensaver.admin@gmail.com"; // ✅ Define admin email
 
   const handleSubmit = async (e) => {
     e.preventDefault();

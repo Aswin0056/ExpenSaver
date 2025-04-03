@@ -70,7 +70,7 @@ const HomePage = () => {
           <button className="register-btn" onClick={() => navigate("/register")}>Register</button>
         </div>
       </nav>
-      <img src={`${process.env.PUBLIC_URL}/ramadan Banner.png`} alt="logo" className="banner" />
+      <img src={`${process.env.PUBLIC_URL}/Banner.webp`} alt="logo" className="banner" />
       <div className="content-container">
         <div className="left-section">
           <img src={`${process.env.PUBLIC_URL}/only logo.png`} alt="ExpenSaver Logo" className="large-logo" />
