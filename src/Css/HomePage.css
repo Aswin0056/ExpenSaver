@@ -273,7 +273,7 @@
 
   .banner{
     height: 105px;
-    width: 500px;
+    width: max-content;
     margin: 10px;
   }
   
