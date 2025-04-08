@@ -136,6 +136,21 @@ const HomePage = () => {
         </div>
       </div>
 
+      <a
+  href="/app-debug.apk"
+  download
+  style={{
+    padding: '10px 20px',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    textDecoration: 'none',
+    borderRadius: '8px'
+  }}
+>
+  📱 Download Android App (APK)
+</a>
+
+
       <footer className="footer-home">
         <div className="footer-container-home">
           <div className="footer-section-home">

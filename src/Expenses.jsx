@@ -20,7 +20,7 @@ const Navbar = ({ search, setSearch }) => (
 const Sidebar = () => {
   const navigate = useNavigate();
   return (
-    <div className="sidebar-E">
+    <div className="sidebar">
       <ul>
         <li onClick={() => navigate("/dashboard")}>Dashboard</li>
         <li onClick={() => navigate("/expenses")}>Expenses</li>

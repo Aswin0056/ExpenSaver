@@ -21,42 +21,6 @@ body {
   margin-left: 20px;
 }
 
- /* Sidebar */
- .sidebar-E {
-  width: 120px;
-  background-color: rgb(81, 59, 85);
-  height: 800px;
-  padding: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #ddd;
-}
-
-.sidebar-E ul {
-  list-style: none;
-  margin-top: 100px;
-  padding: 0;
-}
-
-.sidebar-E ul li {
-  padding: 15px;
-  border-bottom: 1px solid ;
-  transition: 1s;
-  cursor: pointer;
-}
-
-.sidebar-E ul li a {
-  text-decoration: none;
-  color: black;
-  font-weight: 300;
-  font-size: 16px;
-}
-
-.sidebar-E ul li:hover {
-  background: rgba(0, 0, 0, 0.397);
-}
-
 
 /* Filter Bar */
 .filter-bar {
@@ -179,20 +143,7 @@ body {
   .action-button {
     gap: 10px;
   }
-  .sidebar-E {
-    width: 80px;
-    padding: 10px;
-    margin-top: 50px;
-  }
 
-  .sidebar-E ul {
-    margin-top: 50px;
-  }
-
-  .sidebar-E ul li {
-    padding: 10px;
-    font-size: 14px;
-  }
 }
 
 /* For mobile devices (max-width: 768px) */
@@ -225,33 +176,7 @@ body {
   .search-input {
     width: 50%;
   }
-  .sidebar-E {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 60px; /* Below the navbar */
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 999;
-    margin-top: 50px;
-  }
-
-  .sidebar-E ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .sidebar-E ul li {
-    padding: 10px 15px;
-    font-size: 14px;
-    border-bottom: none;
-  }
+  
 }
 
 /* For very small screens (max-width: 480px) */
@@ -261,9 +186,7 @@ body {
     width: 100%;
     overflow-x: auto;
   }
-  .sidebar{
-    margin-top: 0px;
-  }
+
   .search-input {
     width: 60%;
   }
@@ -322,18 +245,80 @@ body {
     text-align: center;
    
   }
-.sidebar {
-  /* Hide sidebar on very small screens */
-   padding-top: 60px;
-   position: absolute;
- }
+
 
  .expenses-content{
   margin-top: -120px;
  }
- .sidebar-E {
-  /* Hide sidebar on very small screens */
-   padding-top: 30px;
-   position: absolute;
- }
+
+}
+
+
+/* Sidebar Default Styles */
+.sidebar-E {
+  width: 120px;
+  background-color: rgb(81, 59, 85);
+  height: 100vh; /* Make it full height */
+  padding: 20px;
+  position: fixed; /* Fixed to the left */
+  left: 0;
+  top: 0;
+  color: #ddd;
+  overflow-y: auto; /* Enable scrolling if needed */
+}
+
+/* Adjust Sidebar for Tablets and Smaller Screens */
+@media (max-width: 1024px) {
+  .sidebar-E {
+    width: 80px;
+    padding: 10px;
+  }
+
+  .sidebar-E ul {
+    margin-top: 50px;
+  }
+
+  .sidebar-E ul li {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .sidebar-E {
+    width: 100%;
+    height: auto;
+    position: relative; /* Set relative so it moves with the content */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 999;
+  }
+
+  .sidebar-E ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-E ul li {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: none;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .sidebar-E {
+    padding-top: 10px;
+    position: absolute; /* Ensure it moves with content */
+  }
+
+  .expenses-content {
+    margin-top: 20px;
+  }
 }
