@@ -73,7 +73,7 @@ const HomePage = () => {
       {/* <img src={`${process.env.PUBLIC_URL}/Banner.webp`} alt="logo" className="banner" /> */}
       <div className="content-container">
         <div className="left-section">
-          <img src={`${process.env.PUBLIC_URL}/only logo.png`} alt="ExpenSaver Logo" className="large-logo" />
+          <img src={`${process.env.PUBLIC_URL}/only-logo.png`} alt="ExpenSaver Logo" className="large-logo" />
         </div>
 
         <div className="right-section">
