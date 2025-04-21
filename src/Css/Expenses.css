@@ -1,324 +1,431 @@
-/* General Styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
 }
 
-/* Navbar Styles */
-.navbar-E {
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar Styling */
+.navbar-D {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: rgb(81, 59, 85);/* Dark navy background */
+  background-color: rgb(81, 59, 85); /* Dark navy background */
   color: white;
+  top: 5px;
+  position: absolute;
 }
-.logo-E {
+
+.logo-D {
   height: 70px;
   width: 80px;
   z-index: 1000;
   margin-left: 20px;
 }
 
-
-/* Filter Bar */
-.filter-bar {
+.navbar-right-D {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
+  gap: 15px;
 }
 
-.filter-bar select {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.profile-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  margin-right: -15px;
 }
 
-/* Container */
-.expenses-container {
+.profile-logo:hover {
+  transform: scale(1.1);
+}
+
+.username {
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 150px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  padding: 8px 0;
 }
 
-/* Expenses Content */
-.expenses-content {
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2c3e50;
+  transition: background 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 120px;
+  background-color: rgb(81, 59, 85);
+  height: 800px;
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ddd;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 100px;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  border-bottom: 1px solid;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.sidebar ul li:hover {
+  background: rgba(0, 0, 0, 0.397);
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 100px;
+  display: flex;
+  margin-left: 200px; /* Space for sidebar */
+}
+
+.dashboard-content {
   flex: 1;
-  padding: 30px;
   text-align: center;
+  padding: 30px;
+}
+
+.add-button {
+  background-color: rgb(81, 59, 85);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.add-button:hover {
+  background-color: blue;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
 }
 
 /* Expense Table */
 .expense-table {
-  width: 90%;
-  max-width: 800px;
-  margin: auto;
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 15px;
   background: white;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-
-.edit-button, .update-button {
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.update-button {
-  background-color: #28a745;
-  color: white;
-}
-
-.update-button:hover {
-  background-color: #218838;
-}
-
-.edit-button:hover {
-  background-color: #e0a800;
-}
-
-.cancel-button {
-  background-color: rgba(128, 128, 128, 0.658);
-  font-weight: bolder;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  padding: 6px 12px;
-  color: black;
-}
-
-.cancel-button:hover{
-  background-color: rgba(255, 0, 0, 0.712);
-}
-
-.action-button{
-  display: flex;
-  gap: 15px;
-}
-
-.delete-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  margin-left: 8px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.delete-button:hover {
-  background-color: #c0392b;
-}
-
-.search-input {
+.expense-table th,
+.expense-table td {
+  border: 1px solid #ddd;
   padding: 10px;
-  width: 30%;
-  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.expense-table th {
+  background-color: rgb(81, 59, 85);
+  color: white;
+}
+
+.expense-table td {
+  background-color: #ecf0f1;
+}
+
+.expense-table tr:hover {
+  background-color: #d5dbdb;
+}
+
+/* Add Expense Table */
+.add-expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.add-expense-table th,
+.add-expense-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.add-expense-table th {
+  background-color: rgb(81, 59, 85);
+  color: white;
+}
+
+.input-field {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  z-index: 1000;
+  outline: none;
 }
 
+.input-field:focus {
+  border-color: #2980b9;
+}
 
+/* Expense Form Container */
+.expense-form {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgb(238, 233, 233);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.493);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  gap: 1%;
+}
 
-/* For tablets and small screens (max-width: 1024px) */
+.expense-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.expense-form button {
+  width: 100%;
+  background: rgb(81, 59, 85);
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.expense-form button:hover {
+  background: #0056b3;
+}
+
+/* Responsive Design */
 @media (max-width: 1024px) {
-  .expenses-content {
-    padding: 20px;
+  .sidebar {
+    width: 80px;
+    padding: 10px;
+    margin-top: 50px;
   }
 
-  .expense-table {
-    width: 95%;
+  .sidebar ul {
+    margin-top: 50px;
   }
 
-  .edit-button, .update-button, .cancel-button, .delete-button {
-    padding: 5px 10px;
+  .sidebar ul li {
+    padding: 10px;
     font-size: 14px;
   }
 
-  .action-button {
-    gap: 10px;
-  }
-
-}
-
-/* For mobile devices (max-width: 768px) */
-@media (max-width: 768px) {
-  .expenses-content {
-    padding: 15px;
-    margin-left: -50px;
-  }
-
-  .expense-table {
-    width: 100%;
+  .navbar {
+    padding: 10px;
     font-size: 14px;
+  }
+
+  .main-content {
+    margin-left: 100px;
   }
 
   .expense-table th,
   .expense-table td {
     padding: 8px;
-  }
-
-  .edit-button, .update-button, .cancel-button, .delete-button {
-    padding: 4px 8px;
-    font-size: 12px;
-    margin-top: 10px;
-  }
-
-  .action-button {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .search-input {
-    width: 50%;
-  }
-  
-}
-
-/* For very small screens (max-width: 480px) */
-@media (max-width: 480px) {
-  
-  .expense-table {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  .search-input {
-    width: 60%;
-  }
-  .expense-table input {
-    width: 80%; /* Prevent input fields from expanding too much */
-    max-width: 100px; /* Limit input field width */
-    font-size: 14px;
-    padding: 5px;
-  }
-
-  .expenses-content {
-    overflow-x: auto; /* Allow horizontal scrolling if necessary */
-  }
-
-  .expenses-container {
-    width: 100%;
-    overflow-x: hidden; /* Prevent unnecessary horizontal scroll */
-  }
-
-  .expenses-content {
-    padding: 10px;
-    margin-top: 50px;
-  }
-
-  .expense-table {
-    font-size: 12px;
-  }
-
-  .expense-table th,
-  .expense-table td {
-    padding: 6px;
-  }
-
-  .action-button {
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .edit-button, .update-button, .cancel-button, .delete-button {
-    padding: 3px 6px;
-    font-size: 10px;
-    width: 100%;
-  }
-  .main-content{
-    margin-left: 50px;
-    padding-top: 50px;
-  }
-  .delete-button{
-    margin-left: -1px;
-  }
-  .navbar-E {
-    padding: 5px;
-    font-size: 10px;
-    flex-direction: column;
-    text-align: center;
-   
-  }
-
-
- .expenses-content{
-  margin-top: -120px;
- }
-
-}
-
-
-/* Sidebar Default Styles */
-.sidebar-E {
-  width: 120px;
-  background-color: rgb(81, 59, 85);
-  height: 100vh; /* Make it full height */
-  padding: 20px;
-  position: fixed; /* Fixed to the left */
-  left: 0;
-  top: 0;
-  color: #ddd;
-  overflow-y: auto; /* Enable scrolling if needed */
-}
-
-/* Adjust Sidebar for Tablets and Smaller Screens */
-@media (max-width: 1024px) {
-  .sidebar-E {
-    width: 80px;
-    padding: 10px;
-  }
-
-  .sidebar-E ul {
-    margin-top: 50px;
-  }
-
-  .sidebar-E ul li {
-    padding: 10px;
     font-size: 14px;
   }
 }
 
-/* Mobile Screens */
 @media (max-width: 768px) {
-  .sidebar-E {
+  .sidebar {
     width: 100%;
     height: auto;
-    position: relative; /* Set relative so it moves with the content */
+    position: fixed;
+    top: 60px; /* Below the navbar */
+    left: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
     z-index: 999;
+    margin-top: 50px;
   }
 
-  .sidebar-E ul {
+  .sidebar ul {
     display: flex;
+    list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .sidebar-E ul li {
+  .sidebar ul li {
     padding: 10px 15px;
     font-size: 14px;
     border-bottom: none;
   }
-}
 
-/* Very Small Screens */
-@media (max-width: 480px) {
-  .sidebar-E {
-    padding-top: 10px;
-    position: absolute; /* Ensure it moves with content */
+  .main-content {
+    margin-left: 0;
+    margin-top: 150px; /* Push content down to avoid overlapping */
   }
 
-  .expenses-content {
-    margin-top: 20px;
+  .navbar {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .user-username {
+    font-size: 0.8rem;
+    margin-left: -30px;
+  }
+
+  .expense-table th,
+  .expense-table td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .search-input {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    padding-top: 30px;
+    position: absolute;
+  }
+
+  .designed {
+    font-size: 10px;
+    margin-right: 50px;
+  }
+
+  .dashboard-content {
+    margin-left: -50px;
+    margin-top: -100px;
+  }
+
+  .navbar {
+    padding: 5px;
+    font-size: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-name {
+    font-size: 0.9rem;
+    margin: 0;
+    font-family: cursive;
+  }
+
+  .logo {
+    margin-left: -20px;
+  }
+
+  .dashboard-container h2 {
+    font-size: 14px;
+  }
+
+  .expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-left: -15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .expense-form input {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .addx-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .addx-button:hover {
+    background: #0056b3;
   }
 }

@@ -23,8 +23,8 @@ body {
   }
 
   .login-logo{
-    margin-top: -30px;
     margin-right: 50px;
+    width: 120px;
   }
   
   .login-box {

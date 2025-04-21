@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Css/Income.css";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEdit, FaCalendarAlt } from "react-icons/fa";
+import { FaEdit, FaCalendarAlt } from "react-icons/fa";
 
 const months = [
   "January", "February", "March", "April", "May", "June", 
@@ -101,44 +101,7 @@ const Income = ({ expenses = {} }) => {
         <Sidebar />
       </div>
 
-      {/* Footer Section */}
-      <footer className="footer-income">
-        <div className="footer-container-income">
-          <div className="footer-section-income">
-            <h4>About</h4>
-            <p>ExpenSaver is a personal finance tracker helping users manage their daily expenses efficiently.</p>
-          </div>
-          
-          <div className="footer-section-income">
-            <h4>Contact</h4>
-            <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
-            <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
-          </div>
-          
-          <div className="footer-section-income">
-            <h4>Owner</h4>
-            <p>Developed by <strong style={{"fontFamily":'cursive'}}>Aswin</strong></p>
-            <h5><a className="more-info" href="/ownerinfo">More Info</a></h5>
-          </div>
-          
-          <div className="footer-section-income">
-            <h4>User Guide</h4>
-            <p>
-              <a href="/user-guide">Click here to learn how to use ExpenSaver</a>
-            </p>
-          </div>
-          
-          <div className="footer-section-income social-media">
-            <h4>Follow Us</h4>
-            <div className="social-icons">
-              <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-              <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-              <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
+
     </div>
   );
 };

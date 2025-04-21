@@ -1,3 +1,11 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Income Bar */
 .income-bar {
   display: flex;
   align-items: center;
@@ -56,69 +64,13 @@
   color: #0056b3;
 }
 
-/* * Footer Styling */ 
-.footer-income{
-  background-color: #333;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  width: 100%;
-  position: absolute; /* Ensures it stays at the bottom */
-  bottom: -210px;
-  }
-  
-  .footer-container-income {
-    display: flex; /* Arrange sections side by side */
-    justify-content: space-around; /* Space out sections */
-    flex-wrap: wrap; /* Ensure responsiveness */
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-  }
-  
-  .footer-section-income {
-    flex: 1; /* Equal width sections */
-    min-width: 200px; /* Prevents sections from shrinking too much */
-    padding: 10px;
-  }
-  
-  .social-icons a {
-    margin: 0 10px;
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-  }
-  
-  .social-icons a:hover {
-    color: #1DA1F2; /* Example hover color */
-  }
-  
-  .under-construction {
-    text-align: center;
-    background: #ffcc00;
-    color: #333;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  /* 🔹 Responsive Design */
- /* 🔹 Responsive Design */
-
-
-/* For screens smaller than 1024px (Tablets & Smaller Laptops) */
+/* Responsive Design */
 @media screen and (max-width: 1024px) {
   .income-bar {
     margin-left: 50px;
     margin-right: 50px;
     margin-top: 80px;
-    flex-direction: column; /* Stack items in column */
+    flex-direction: column;
     padding: 15px;
   }
 
@@ -138,7 +90,6 @@
   }
 }
 
-/* For screens smaller than 768px (Mobile & Small Tablets) */
 @media screen and (max-width: 768px) {
   .income-bar {
     margin-left: 20px;
@@ -171,43 +122,22 @@
     padding: 10px;
     font-size: 18px;
   }
-
-  /* Footer Adjustments */
-  .footer-income {
-    position: relative;
-    bottom: 0;
-    padding: 15px 0;
-  }
-
-  .footer-container-income {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-section-income {
-    min-width: 100%;
-  }
-
-  .social-icons a {
-    font-size: 18px;
-    margin: 5px;
-  }
 }
 
-/* For screens smaller than 480px (Small Mobile Phones) */
 @media screen and (max-width: 480px) {
   .income-bar {
     margin-top: 250px;
     padding: 10px;
   }
-  .SC-Nav{
-     display: flex;
+
+  .SC-Nav {
+    display: flex;
   }
+
   .calendar-icon {
-    font-size: 20px; /* Adjust as needed */
+    font-size: 20px;
     cursor: pointer;
     margin: 5%;
-    /* margin-left: 50px ; */
     z-index: 1000;
   }
 
@@ -227,30 +157,5 @@
 
   .edit-icon {
     font-size: 12px;
-  }
-
-  /* Footer Adjustments */
-  .footer-income {
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  .footer-section-income h4 {
-    font-size: 14px;
-  }
-
-  .footer-section-income p {
-    font-size: 12px;
-  }
-
-  .social-icons a {
-    font-size: 16px;
-  }
-  .navbar-I {
-    padding: 5px;
-    font-size: 10px;
-    flex-direction: column;
-    text-align: center;
-   
   }
 }

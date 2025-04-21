@@ -16,6 +16,12 @@ const HomePage = () => {
   const [name, setName] = useState("");  // New state for name input
   const [email, setEmail] = useState("");  // New state for email input
   const [error, setError] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -59,17 +65,29 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <nav className="navbar">
-        <div className="logo-container">
-          <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="ExpenSaver Logo" className="homepage-logo" />
-        </div>
-        {/* <div className="search-container">
-          <input type="text" placeholder="Search..." className="search-bar" />
-        </div> */}
-        <div className="nav-buttons">
-          <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
-          <button className="register-btn" onClick={() => navigate("/register")}>Register</button>
-        </div>
-      </nav>
+      <div className="logo-container">
+        <img
+          src={`${process.env.PUBLIC_URL}/logo192.png`}
+          alt="ExpenSaver Logo"
+          className="homepage-logo"
+        />
+      </div>
+      <div className="nav-buttons">
+        <button className="dropdown-btn" onClick={toggleDropdown}>
+          Menu
+        </button>
+        {dropdownOpen && (
+          <div className="dropdown-menu">
+            <button className="login-btn" onClick={() => navigate("/login")}>
+              Login
+            </button>
+            <button className="register-btn" onClick={() => navigate("/register")}>
+              Register
+            </button>
+          </div>
+        )}
+      </div>
+    </nav>
       {/* <img src={`${process.env.PUBLIC_URL}/Banner.webp`} alt="logo" className="banner" /> */}
       <div className="content-container">
         <div className="left-section">
@@ -137,6 +155,7 @@ const HomePage = () => {
       </div>
 
       <a
+      className="download-section"
   href="/app-debug.apk"
   download
   style={{
@@ -151,37 +170,58 @@ const HomePage = () => {
 </a>
 
 
-      <footer className="footer-home">
-        <div className="footer-container-home">
-          <div className="footer-section-home">
-            <h4>About</h4>
-            <p>ExpenSaver is a personal finance tracker helping users manage their daily expenses efficiently.</p>
-          </div>
-          <div className="footer-section-home">
-            <h4>Contact</h4>
-            <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
-            <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
-          </div>
-          <div className="footer-section-home">
-            <h4>Owner</h4>
-            <p>Powered By <strong style={{"color":'black'}}>Azh</strong><strong style={{"color":'goldenrod'}}>Studio</strong></p>
-            <h5><a className="more-info" href="/ownerinfo">More Info</a></h5>
-          </div>
-          <div className="footer-section-home">
-            <h4>User Guide</h4>
-            <p><a href="/user-guide">Click here to learn how to use ExpenSaver</a></p>
-          </div>
-          <div className="footer-section-home social-media">
-            <h4>Follow Us</h4>
-            <div className="social-icons">
-              <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-              <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-              <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
+<footer className="footer-home">
+  <div className="footer-container-home">
+  <div>
+    <div className="footer-section-home">
+      <h4>About</h4>
+      <p>ExpenSaver is a personal finance tracker that helps users manage their daily expenses efficiently.</p>
+    </div>
+
+    <div className="footer-section-home">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
+      <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
+    </div>
+</div>
+ <div>
+    <div className="footer-section-home">
+      <h4>Owner</h4>
+      <p>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </p>
+      <h5>
+        <a className="more-info" href="/ownerinfo">More Info</a>
+      </h5>
+    </div>
+</div>
+<div>
+    <div className="footer-section-home">
+      <h4>User Guide</h4>
+      <p><a href="/user-guide">Click here to learn how to use ExpenSaver</a></p>
+    </div>
+
+    <div className="footer-section-home social-media">
+      <h4>Follow Us</h4>
+      <div className="social-icons">
+        <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer">
+          <FaFacebook />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <FaTwitter />
+        </a>
+        <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer">
+          <FaInstagram />
+        </a>
+        <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer">
+          <FaLinkedin />
+        </a>
+      </div>
+    </div>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };
