@@ -16,7 +16,7 @@
   padding: 15px 30px;
   background: linear-gradient(135deg, #6c4f8c, #4c2b85);
   color: white;
-  width: 98%;
+  width: 95%;
   border-radius: 25px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   position: absolute;
@@ -353,11 +353,12 @@
   .homepage-logo {
     width: 60px;
     height: auto;
-    margin-left: -150px;
+    margin-left: 10px;
   }
 
   .logo-container {
-    margin-top: 10px;
+
+    z-index: 1000;
   }
 
   .content-container {
@@ -365,19 +366,9 @@
   }
 
   .nav-buttons {
-    margin-top: -65px;
+    margin-top: -4px;
     padding: 5%;
-    margin-right: 35px;
-  }
-
-  .dropdown-menu button{
-    margin: 5px;
-    width: 100px;
-  }
-
-  .dropdown-menu{
-    width: 110px;
-    margin-right: 10px;
+    margin-right: 0px;
   }
 
   .dropdown-btn {
@@ -413,6 +404,9 @@
     font-size: 14px;
     width: 60%;
     margin-bottom: 50px;
+  }
+  .navbar{ 
+    width: 82%;
   }
 }
 
@@ -529,5 +523,4 @@
   .footer-section-home .social-icons a {
     font-size: 20px;
   }
-  
 }

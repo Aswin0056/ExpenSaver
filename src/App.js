@@ -13,14 +13,11 @@ import HomePage from "./HomePage";
 import Admin from "./admin";
 import OwnerInfo from "./OwnerInfo";
 import ProfileSettings from "./ProfileSettings";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Sidebar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />

@@ -83,6 +83,10 @@
   h2 {
     font-size: 1.8rem;
   }
+  .register-box {
+    width: 245px;
+    padding: 15px;
+  }
 }
 
 /* For large screens (desktops) */
@@ -94,4 +98,6 @@
   h2 {
     font-size: 2rem;
   }
+  
 }
+
