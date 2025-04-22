@@ -1,56 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
 import "./Css/Dashboard.css";
 
+
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-
-const Navbar = ({ handleLogout, username }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navigate = useNavigate();
-  return (
-    <nav className="navbar-D">
-      {/* Left Side - Logo */}
-      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo-D" />
-
-      {/* Right Side - Profile Section */}
-      <div className="navbar-right-D">
-        <div className="profile-dropdown">
-          <img 
-            src={`${process.env.PUBLIC_URL}/profile-logo.png`} 
-            alt="Profile" 
-            className="profile-logo"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          />
-          <span className="username" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            {username || "User"} 
-          </span>
-          
-          {dropdownOpen && (
-            <div className="dropdown-menu">
-              <button onClick={() => navigate("/profilesettings")}>Profile Settings</button>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-const Sidebar = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="sidebar">
-      <ul>
-        <li onClick={() => navigate("/dashboard")}>Dashboard</li>
-        <li onClick={() => navigate("/expenses")}>Expenses</li>
-        <li onClick={() => navigate("/income")}>Income</li>
-      </ul>
-    </div>
-  );
-};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -142,16 +97,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/login");
-  };
-
   return (
     <div className="dashboard-container">
-      <Navbar handleLogout={handleLogout} username={username} />
       <div className="main-content">
-        <Sidebar />
         <div className="dashboard-content">
           <h2>Welcome to Your Dashboard, {username || "User"}!</h2>
           {error && <p style={{ color: "red" }}>{error}</p>}
@@ -182,8 +130,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-   
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "-50px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h6>
     </div>
   );
 };

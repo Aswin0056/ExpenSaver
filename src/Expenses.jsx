@@ -3,36 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Expenses.css";
 
-
-const Navbar = ({ search, setSearch }) => (
-  <nav className="navbar-E">
-    <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo-E" />
-    <input
-      type="text"
-      placeholder="Search expenses..."
-      className="search-input"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-    />
-  </nav>
-);
-
-const Sidebar = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="sidebar">
-      <ul>
-        <li onClick={() => navigate("/dashboard")}>Dashboard</li>
-        <li onClick={() => navigate("/expenses")}>Expenses</li>
-        <li onClick={() => navigate("/income")}>Income</li>
-      </ul>
-    </div>
-  );
-};
-
-
 const Expenses = () => {
-  const [search, setSearch] = useState("");
+  
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [filter, setFilter] = useState("all");
@@ -141,9 +113,8 @@ const Expenses = () => {
 
   return (
     <div className="expenses-container">
-      <Navbar search={search} setSearch={setSearch} />
       <div className="main-content">
-        <Sidebar />
+
         <div className="expenses-content">
           <h2>Expense History</h2>
           
@@ -181,59 +152,56 @@ const Expenses = () => {
               </tr>
             </thead>
             <tbody>
-  {filteredExpenses.map((expense) => (
-
-                  <tr key={expense.id}>
-                    {editingExpense?.id === expense.id ? (
-                      <>
-                      
-                        <td>
-                          <input
-                            type="text"
-                            value={editingExpense.title}
-                            onChange={(e) => handleInputChange(e, "title")}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            value={editingExpense.amount}
-                            onChange={(e) => handleInputChange(e, "amount")}
-                          />
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            value={editingExpense.quantity || ""}
-                            onChange={(e) => handleInputChange(e, "quantity")}
-                          />
-                        </td>
-                      
-                        <td>
-                          {(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}
-                        </td>
-                        <td>{new Date(editingExpense?.created_at).toLocaleString()}</td>
-                        <td className="action-button">
-                          <button className="update-button" onClick={handleUpdate}>Update</button>
-                          <button className="cancel-button" onClick={() => setEditingExpense(null)}>Cancel</button>
-                        </td>
-                      </>
-                    ) : (
-                      <>
-                        <td>{expense.title}</td>
-                        <td>{expense.amount}</td>
-                        <td>{expense.quantity || "-"}</td>
-                        <td>{(expense.amount * (expense.quantity || 1)).toFixed(2)}</td>
-                        <td>{new Date(expense.created_at).toLocaleString()}</td>
-                        <td className="action-button">
-                          <button className="edit-button" onClick={() => handleEdit(expense)}>Edit</button>
-                          <button className="delete-button" onClick={() => handleDelete(expense.id)}>Delete</button>
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                ))}
-                 <tr className="grand-total-row">
+              {filteredExpenses.map((expense) => (
+                <tr key={expense.id}>
+                  {editingExpense?.id === expense.id ? (
+                    <>
+                      <td>
+                        <input
+                          type="text"
+                          value={editingExpense.title}
+                          onChange={(e) => handleInputChange(e, "title")}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={editingExpense.amount}
+                          onChange={(e) => handleInputChange(e, "amount")}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={editingExpense.quantity || ""}
+                          onChange={(e) => handleInputChange(e, "quantity")}
+                        />
+                      </td>
+                      <td>
+                        {(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}
+                      </td>
+                      <td>{new Date(editingExpense?.created_at).toLocaleString()}</td>
+                      <td className="action-button">
+                        <button className="update-button" onClick={handleUpdate}>Update</button>
+                        <button className="cancel-button" onClick={() => setEditingExpense(null)}>Cancel</button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td>{expense.title}</td>
+                      <td>{expense.amount}</td>
+                      <td>{expense.quantity || "-"}</td>
+                      <td>{(expense.amount * (expense.quantity || 1)).toFixed(2)}</td>
+                      <td>{new Date(expense.created_at).toLocaleString()}</td>
+                      <td className="action-button">
+                        <button className="edit-button" onClick={() => handleEdit(expense)}>Edit</button>
+                        <button className="delete-button" onClick={() => handleDelete(expense.id)}>Delete</button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+              <tr className="grand-total-row">
                 <td colSpan="3"><strong>Grand Total</strong></td>
                 <td><strong>₹ {grandTotal.toFixed(2)}</strong></td>
                 <td></td>
@@ -243,8 +211,10 @@ const Expenses = () => {
           </table>
         </div>
       </div>
-      
-         
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "-40px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h6>
     </div>
   );
 };

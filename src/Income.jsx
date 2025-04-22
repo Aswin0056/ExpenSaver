@@ -1,57 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Css/Income.css";
-import { FaEdit, FaCalendarAlt } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 const months = [
   "January", "February", "March", "April", "May", "June", 
   "July", "August", "September", "October", "November", "December"
 ];
 
-const Navbar = ({ search, setSearch, selectedDate, setSelectedDate }) => {
-  const [showCalendar, setShowCalendar] = useState(false);
-
-  return (
-    <nav className="navbar-I">
-      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="logo" />
-      <div className="SC-Nav">
-      <input
-        type="text"
-        placeholder="Search expenses..."
-        className="search-input"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <FaCalendarAlt className="calendar-icon" onClick={() => setShowCalendar(!showCalendar)} />
-      {showCalendar && (
-        <input 
-          type="date" 
-          className="calendar-input" 
-          value={selectedDate} 
-          onChange={(e) => setSelectedDate(e.target.value)}
-        />
-      )}
-      </div>
-    </nav>
-  );
-};
-
-const Sidebar = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="sidebar">
-      <ul>
-        <li onClick={() => navigate("/dashboard")}>Dashboard</li>
-        <li onClick={() => navigate("/expenses")}>Expenses</li>
-        <li onClick={() => navigate("/income")}>Income</li>
-      </ul>
-    </div>
-  );
-};
 
 const Income = ({ expenses = {} }) => {
-  const [search, setSearch] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
   const [viewMode, setViewMode] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [amount, setAmount] = useState("");
@@ -67,8 +24,6 @@ const Income = ({ expenses = {} }) => {
 
   return (
     <div className="expenses-container">
-      <Navbar search={search} setSearch={setSearch} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      
       <div className="income-bar">
         {viewMode ? (
           <div className="display-income">
@@ -93,15 +48,17 @@ const Income = ({ expenses = {} }) => {
         )}
       </div>
 
-      <div className="under-construction">
-  🚧 This section is currently under construction. Stay tuned for updates! 🚀
-</div>
-
-      <div className="main-content">
-        <Sidebar />
+      <div style={{marginLeft: "45px"}} className="under-construction">
+        🚧 This section is currently under construction. Stay tuned for updates! 🚀
       </div>
 
-
+      <div className="main-content">
+   
+      </div>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "-40px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h6>
     </div>
   );
 };

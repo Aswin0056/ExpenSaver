@@ -98,6 +98,10 @@ const ProfileSettings = () => {
       <button className="save-button" onClick={handleSaveChanges}>Save Changes</button>
 
       {error && <p className="error-message">{error}</p>}
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "-40px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h6>
     </div>
     
   );

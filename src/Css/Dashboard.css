@@ -10,128 +10,11 @@ body {
   min-height: 100vh;
 }
 
-/* Navbar Styling */
-.navbar-D {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: rgb(81, 59, 85); /* Dark navy background */
-  color: white;
-  top: 5px;
-  position: absolute;
-}
-
-.logo-D {
-  height: 70px;
-  width: 80px;
-  z-index: 1000;
-  margin-left: 20px;
-}
-
-.navbar-right-D {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.profile-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  margin-right: -15px;
-}
-
-.profile-logo:hover {
-  transform: scale(1.1);
-}
-
-.username {
-  font-size: 16px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.profile-dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background: white;
-  color: black;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0;
-}
-
-.dropdown-menu button {
-  background: none;
-  border: none;
-  padding: 10px 15px;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
-  color: #2c3e50;
-  transition: background 0.2s;
-}
-
-.dropdown-menu button:hover {
-  background: #f0f0f0;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 120px;
-  background-color: rgb(81, 59, 85);
-  height: 800px;
-  padding: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #ddd;
-}
-
-.sidebar ul {
-  list-style: none;
-  margin-top: 100px;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 15px;
-  border-bottom: 1px solid;
-  transition: 1s;
-  cursor: pointer;
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  color: black;
-  font-weight: 300;
-  font-size: 16px;
-}
-
-.sidebar ul li:hover {
-  background: rgba(0, 0, 0, 0.397);
-}
-
 /* Main Content */
 .main-content {
   margin-top: 100px;
   display: flex;
-  margin-left: 200px; /* Space for sidebar */
+  margin-left: 0;
 }
 
 .dashboard-content {
@@ -304,28 +187,8 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .sidebar {
-    width: 80px;
-    padding: 10px;
-    margin-top: 50px;
-  }
-
-  .sidebar ul {
-    margin-top: 50px;
-  }
-
-  .sidebar ul li {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .navbar {
-    padding: 10px;
-    font-size: 14px;
-  }
-
   .main-content {
-    margin-left: 100px;
+    margin-left: 0;
   }
 
   .expense-table th,
@@ -336,47 +199,9 @@ body {
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 60px; /* Below the navbar */
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 999;
-    margin-top: 50px;
-  }
-
-  .sidebar ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .sidebar ul li {
-    padding: 10px 15px;
-    font-size: 14px;
-    border-bottom: none;
-  }
-
   .main-content {
     margin-left: 0;
-    margin-top: 150px; /* Push content down to avoid overlapping */
-  }
-
-  .navbar {
-    padding: 8px;
-    font-size: 12px;
-  }
-
-  .user-username {
-    font-size: 0.8rem;
-    margin-left: -30px;
+    margin-top: 150px;
   }
 
   .expense-table th,
@@ -396,26 +221,9 @@ body {
 }
 
 @media (max-width: 480px) {
-  .sidebar {
-    padding-top: 30px;
-    position: absolute;
-  }
-
-  .designed {
-    font-size: 10px;
-    margin-right: 50px;
-  }
-
-  .dashboard-content {
-    margin-left: -50px;
-    margin-top: -100px;
-  }
-
-  .navbar {
-    padding: 5px;
-    font-size: 10px;
-    flex-direction: column;
-    text-align: center;
+  .dashboard-container {
+    margin-left: 80px;
+    margin-RIGHT: -20px;
   }
 
   .user-name {
@@ -429,7 +237,7 @@ body {
   }
 
   .dashboard-container h2 {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   .expense-form {
@@ -472,9 +280,5 @@ body {
   .footer {
     font-size: 10px;
     padding: 8px;
-  }
-
-  .sidebar {
-    margin-top: 0px;
   }
 }

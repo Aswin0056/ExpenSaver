@@ -1,115 +1,90 @@
 .admin-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(81, 59, 85);
-    color: white;
-    padding: 10px;
-  }
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-  .navbar h2{
-    color: antiquewhite;
-  }
-  
-  .logout-admin {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-  }
-  
-  .admin-content {
-    margin-top: 20px;
-  }
-  
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .admin-table th, .admin-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .admin-table th {
-    background-color:  rgb(81, 59, 85);
-    color: white;
-  }
-  
-  .delete-admin {
-    padding: 4px 8px;
-    font-size: 12px;
-    background-color: rgb(241, 63, 63);
-    color: white;
-    border: none;
-    border-radius: 4px ;
-  }
+.logout-admin {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
 
+.admin-content {
+  margin-top: 20px;
+}
 
-  @media (max-width: 768px) {
-    .admin-container {
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.admin-table th {
+  background-color: rgb(81, 59, 85);
+  color: white;
+}
+
+.delete-admin {
+  padding: 4px 8px;
+  font-size: 12px;
+  background-color: rgb(241, 63, 63);
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
       padding: 10px;
-    }
-  
-    .navbar {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .logout-admin {
+  }
+
+  .logout-admin {
       width: 80px;
       margin-top: 10px;
-      border-radius: 8px ;
-    }
-  
-    .admin-table {
-      font-size: 14px;
-    }
-  
-    .admin-table th,
-    .admin-table td {
-      padding: 6px;
-    }
+      border-radius: 8px;
   }
-  
-  @media (max-width: 480px) {
 
-    .admin-content{
+  .admin-table {
+      font-size: 14px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+      padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
       margin-top: 150px;
-    }
-    .admin-table {
+  }
+
+  .admin-table {
       display: block;
       overflow-x: auto;
       white-space: nowrap;
-      
-    }
-  
-    .admin-table th,
-    .admin-table td {
+  }
+
+  .admin-table th,
+  .admin-table td {
       font-size: 12px;
       padding: 5px;
-    }
-  
-    .navbar {
-      padding: 5px;
-    }
-  
-    .logout-admin {
+  }
+
+  .logout-admin {
       font-size: 14px;
-      
-    }
-    .delete-admin {
+  }
+
+  .delete-admin {
       padding: 4px 8px;
       font-size: 12px;
-    }
   }
-  
+}
