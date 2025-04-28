@@ -186,3 +186,95 @@ body {
     margin-top: -0px;
   }
 }
+
+
+
+/* Login.css */
+
+/* Default styles for notification */
+.notification {
+  position: fixed;
+  top: 5px;
+  left: 600px;
+  right: 0;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  z-index: 1000;
+  width: 150px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.notification p {
+  margin: 0;
+  font-weight: bold;
+  color: white;
+}
+
+/* Hover effect */
+.notification:hover {
+  opacity: 1;
+  cursor: pointer;
+  background-color: #45a049;
+}
+
+.notification.hidden {
+  opacity: 0;
+}
+
+/* Error message notification styles */
+.message.error {
+  position: fixed;
+  top: 5px;
+  left: 620px;
+  right: 0;
+  background-color: red;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  z-index: 1000;
+  width: 150px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.message.error p {
+  margin: 0;
+  font-weight: bold;
+  color: white;
+}
+
+/* Hover effect for error message */
+.message.error:hover {
+  opacity: 1;
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.712);
+}
+
+.message.error.hidden {
+  opacity: 0;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  /* Adjust notification positioning for smaller screens */
+  .notification, .message.error {
+    left: 10px; /* Align to the left edge on smaller screens */
+    width: 90%; /* Make the notification wider */
+    font-size: 14px; /* Slightly smaller font size */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjust notification for very small screens (mobile phones) */
+  .notification, .message.error {
+    left: 5px; /* Slightly more margin from the left edge */
+    width: 95%; /* Use most of the screen width */
+    font-size: 14px; /* Keep the font size smaller */
+    padding: 12px; /* Reduce padding for smaller screens */
+  }
+}

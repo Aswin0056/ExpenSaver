@@ -14,7 +14,7 @@ body {
 .main-content {
   margin-top: 100px;
   display: flex;
-  margin-left: 0;
+
 }
 
 .dashboard-content {
@@ -24,7 +24,7 @@ body {
 }
 
 .add-button {
-  background-color: rgb(81, 59, 85);
+  background-color:  #6c4f8c;
   color: white;
   border: none;
   padding: 8px 15px;
@@ -34,7 +34,7 @@ body {
 }
 
 .add-button:hover {
-  background-color: blue;
+  background-color: rgb(81, 59, 85);
 }
 
 .logout-button {
@@ -144,7 +144,7 @@ body {
 }
 
 .input-field:focus {
-  border-color: #2980b9;
+  border-color: rgb(81, 59, 85);
 }
 
 /* Expense Form Container */
@@ -187,10 +187,6 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .main-content {
-    margin-left: 0;
-  }
-
   .expense-table th,
   .expense-table td {
     padding: 8px;
@@ -199,10 +195,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    margin-top: 150px;
-  }
+
 
   .expense-table th,
   .expense-table td {
@@ -221,9 +214,9 @@ body {
 }
 
 @media (max-width: 480px) {
-  .dashboard-container {
-    margin-left: 80px;
-    margin-RIGHT: -20px;
+  .main-content{
+    width: 80%;
+    padding-left: 60px;
   }
 
   .user-name {
@@ -282,3 +275,4 @@ body {
     padding: 8px;
   }
 }
+

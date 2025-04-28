@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "./Css/Dashboard.css";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 
 
@@ -100,7 +102,8 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-    
+    <Navbar />
+    <Sidebar />
       <div className="main-content">
         <div className="dashboard-content">
           <h2>Welcome to Your Dashboard, {username || "User"}!</h2>
@@ -132,7 +135,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "-50px"}}>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
       </h6>

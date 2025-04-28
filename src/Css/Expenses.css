@@ -24,7 +24,7 @@ body {
 }
 
 .add-button {
-  background-color: rgb(81, 59, 85);
+  background-color:  #6c4f8c;
   color: white;
   border: none;
   padding: 8px 15px;
@@ -34,7 +34,7 @@ body {
 }
 
 .add-button:hover {
-  background-color: blue;
+  background-color: rgb(81, 59, 85);
 }
 
 .logout-button {

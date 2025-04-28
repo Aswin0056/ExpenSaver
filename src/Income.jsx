@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Css/Income.css";
 import { FaEdit } from "react-icons/fa";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const months = [
   "January", "February", "March", "April", "May", "June", 
@@ -24,6 +26,8 @@ const Income = ({ expenses = {} }) => {
 
   return (
     <div className="expenses-container">
+    <Navbar />
+    <Sidebar />
       <div className="income-bar">
         {viewMode ? (
           <div className="display-income">
@@ -55,7 +59,7 @@ const Income = ({ expenses = {} }) => {
       <div className="main-content">
    
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "-40px"}}>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
       </h6>

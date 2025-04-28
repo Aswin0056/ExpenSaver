@@ -19,7 +19,7 @@ const Navbar = ({ search, setSearch }) => {
   return (
     <nav className="banana-bar">
 
-      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="apple-logo" />
+      <img src={`${process.env.PUBLIC_URL}/only-logo.png`} alt="logo" className="apple-logo" />
      
       <div className="grape-group">
       <div className="mango-input">

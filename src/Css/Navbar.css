@@ -1,107 +1,111 @@
-🍌 Navbar Styles with Fruit-Themed Classes
+/* Navbar Container */
 .banana-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(81, 59, 85);
-    padding: 20px 20px;
-    color: white;
-    width: 100%;
-    flex-wrap: wrap;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color:  #6c4f8c;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Logo */
+.apple-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* Group for the search bar and profile icon */
+.grape-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Search Bar */
+.mango-input {
+  margin-right: 20px;
+}
+
+.pineapple-input {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: none;
+  width: 200px;
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.pineapple-input:focus {
+  outline: none;
+  background-color: rgb(194, 194, 194);
+}
+
+/* Profile Icon */
+.mango-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Profile Icon Color */
+.orange-icon {
+  font-size: 24px;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.mango-profile:hover .orange-icon {
+  transform: scale(1.1);
+}
+
+/* Dropdown Menu */
+.kiwi-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  z-index: 1000;
+}
+
+.kiwi-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kiwi-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+}
+
+.kiwi-dropdown li:hover {
+  background-color: #555;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .banana-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  
-  
-  .apple-logo {
-    width: 60px;
-    height: auto;
-    z-index: 1000;
-    margin-left: 35px;
-  }
-  
   .grape-group {
-    display: flex;
-    align-items: center;
-    z-index: 1000;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
   }
-  
+
   .pineapple-input {
-    padding: 8px;
-    margin-right: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 200px;
+    width: 100%;
+    margin-bottom: 10px;
   }
-  
-  .mango-profile {
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .orange-icon {
-    font-size: 30px;
-    margin-left: 20px;
-    color: white;
-  }
-  
-  .kiwi-dropdown {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: #fff;
-    color: black;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    min-width: 150px;
-    z-index: 10;
-  }
-  
-  .kiwi-dropdown ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .kiwi-dropdown ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .kiwi-dropdown ul li:hover {
-    background-color: rgb(81, 59, 85);
-    color: white;
-  }
-  
-  .kiwi-dropdown ul li:last-child {
-    border-bottom: none;
-  }
-  
-  /* 🍇 Responsive Styles */
-  @media screen and (max-width: 768px) {
-  }
-  @media screen and (max-width: 480px) {
-    .apple-logo{
-        display: none;
-    }
-    .mango-input input{
-        width: 50%;
-        margin-left: 45%;
-    }
-    .grape-group{
-        margin-top: 5px;
-    }
-    .mango-profile{
-        margin-left: 35px;
-    }
-    .banana-bar {
-        border-bottom-left-radius: 18px;
-        border-bottom-right-radius: 18px;
-        padding: 30px 20px;
-      }      
-  }
-  
+}

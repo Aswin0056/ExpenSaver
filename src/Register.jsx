@@ -8,9 +8,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [showNotification, setShowNotification] = useState(false); // For success message notification
   const navigate = useNavigate();
 
-  // ✅ Use API URL from environment variables
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   const handleRegister = async (e) => {
@@ -30,7 +30,12 @@ const Register = () => {
         setMessage("Email is already registered. Try logging in.");
       } else if (res.data.message === "Registration successful!") {
         setMessage("Registration successful! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 2000);
+        setShowNotification(true); // Show success notification
+
+        setTimeout(() => {
+          setShowNotification(false); // Hide success notification after 3 seconds
+          navigate("/login"); // Redirect to login page
+        }, 3000);
       }
     } catch (err) {
       console.error("Register Error:", err.response?.data?.error);
@@ -40,6 +45,12 @@ const Register = () => {
 
   return (
     <div className="register-container">
+      {showNotification && (
+        <div className="notification">
+          <p>{message}</p>
+        </div>
+      )}
+
       <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="register-logo" />
       <div className="register-box">
         <h2>Register</h2>
@@ -73,7 +84,7 @@ const Register = () => {
           </div>
           <button type="submit" className="register-button">Register</button>
         </form>
-        {message && <p className="error-message">{message}</p>}
+        {message && !showNotification && <p className="error-message">{message}</p>}
 
         <p className="login-text">
           Already have an account?{" "}
@@ -82,8 +93,8 @@ const Register = () => {
           </button>
         </p>
       </div>
-      <h6 style={{"color":'grey', fontSize: "8px", textAlign: "center"}}>Developed By Aswin</h6>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginTop: "-10px"}}>
+      <h6 style={{ color: 'grey', fontSize: "8px", textAlign: "center" }}>Developed By Aswin</h6>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginTop: "-10px" }}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
       </h6>

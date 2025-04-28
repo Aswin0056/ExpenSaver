@@ -6,13 +6,13 @@ import "./Css/Login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(""); // message for success or error
   const [loading, setLoading] = useState(false);
+  const [showNotification, setShowNotification] = useState(false); // For notification visibility
   const navigate = useNavigate();
 
-  // ✅ Use API URL from environment variables
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-  const ADMIN_EMAIL = "expensaver.admin@gmail.com"; // ✅ Define admin email
+  const ADMIN_EMAIL = "expensaver.admin@gmail.com"; // Admin email
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,25 +22,28 @@ const Login = () => {
     try {
       const res = await axios.post(`${API_URL}/login`, { email, password });
 
-      console.log("🔍 Login Response:", res.data); // Debugging log
+      console.log("🔍 Login Response:", res.data);
 
       if (res.status === 200 && res.data.token) {
-        // ✅ Store tokens and user info in localStorage
         localStorage.setItem("authToken", res.data.token);
         localStorage.setItem("userId", res.data.user.id);
         localStorage.setItem("userEmail", res.data.user.email);
 
-        // ✅ Set Axios default Authorization header
         axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
 
-        console.log("✅ Login successful!");
+        setMessage("Login successful!"); // Success message
+        setShowNotification(true); // Show notification
+        setTimeout(() => {
+          setShowNotification(false); // Hide notification after 3 seconds
+        }, 3000);
 
-        // ✅ Redirect based on user role
-        if (res.data.user.email === ADMIN_EMAIL) {
-          navigate("/admin");
-        } else {
-          navigate("/dashboard");
-        }
+        setTimeout(() => {
+          if (res.data.user.email === ADMIN_EMAIL) {
+            navigate("/admin");
+          } else {
+            navigate("/dashboard");
+          }
+        }, 1500); // Redirect after a short delay to show success message
       } else {
         setMessage("Login failed, please try again.");
       }
@@ -61,6 +64,12 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {showNotification && (
+        <div className="notification">
+          <p>{message}</p>
+        </div>
+      )}
+
       <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="login-logo" />
       <div className="login-box">
         <h2>Login</h2>
@@ -88,7 +97,11 @@ const Login = () => {
           </button>
         </form>
 
-        {message && <p className="error-message">{message}</p>}
+        {message && !showNotification && (
+          <div className={`message ${message.includes("successful") ? "success" : "error"}`}>
+            {message}
+          </div>
+        )}
 
         <p className="signup-text">
           Don't have an account?{" "}
@@ -97,7 +110,6 @@ const Login = () => {
           </button>
         </p>
 
-        {/* ✅ Link to Homepage */}
         <a href="/" className="home-link">
           <img 
             src={`${process.env.PUBLIC_URL}/left-arrow.png`} 
@@ -107,11 +119,11 @@ const Login = () => {
         </a>
       </div>
       <div>
-      <h6 style={{"color":'grey', fontSize: "8px", textAlign: "center"}}>Developed By Aswin</h6>
-      <h5 style={{ fontSize: "6px", textAlign: "center", marginTop: "-5px"}}>
-        Powered by <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h5>
+        <h6 style={{ color: 'grey', fontSize: "8px", textAlign: "center" }}>Developed By Aswin</h6>
+        <h5 style={{ fontSize: "6px", textAlign: "center", marginTop: "-5px" }}>
+          Powered by <strong style={{ color: 'black' }}>Azh</strong>
+          <strong style={{ color: 'goldenrod' }}>Studio</strong>
+        </h5>
       </div>
     </div>
   );

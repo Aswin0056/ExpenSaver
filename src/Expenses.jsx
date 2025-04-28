@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Expenses.css";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const Expenses = () => {
   
@@ -113,8 +115,9 @@ const Expenses = () => {
 
   return (
     <div className="expenses-container">
+    <Navbar />
+    <Sidebar />
       <div className="main-content">
-
         <div className="expenses-content">
           <h2>Expense History</h2>
           
@@ -211,7 +214,7 @@ const Expenses = () => {
           </table>
         </div>
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "-40px"}}>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
       </h6>
