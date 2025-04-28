@@ -60,7 +60,7 @@ body {
   
   .login-button {
     width: 100%;
-    background: #007bff;
+    background:   rgb(81, 59, 85);
     color: white;
     padding: 10px;
     border: none;
@@ -69,7 +69,7 @@ body {
   }
   
   .login-button:hover {
-    background: #0056b3;
+    background:  rgb(81, 59, 85);
   }
   
   .signup-text {
@@ -153,6 +153,7 @@ body {
   .login-container {
     flex-direction: column;
     padding: 20px;
+    height: 90vh;
    
   }
 
@@ -175,5 +176,13 @@ body {
   .register-logo{
     padding-top: 50px;
     padding-left: 50px;
+  }
+
+  .signup-text button{
+    margin-top: 5px;
+  }
+
+  .home-link img{
+    margin-top: -0px;
   }
 }

@@ -82,7 +82,11 @@ const Register = () => {
           </button>
         </p>
       </div>
-      <h6 style={{"fontFamily":'cursive', "color":'grey'}}>Developed By Aswin</h6>
+      <h6 style={{"color":'grey', fontSize: "8px", textAlign: "center"}}>Developed By Aswin</h6>
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginTop: "-10px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h6>
     </div>
   );
 };

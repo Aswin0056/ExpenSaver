@@ -106,7 +106,13 @@ const Login = () => {
           />
         </a>
       </div>
-      <h6 style={{"fontFamily":'cursive', "color":'grey'}}>Developed By Aswin</h6>
+      <div>
+      <h6 style={{"color":'grey', fontSize: "8px", textAlign: "center"}}>Developed By Aswin</h6>
+      <h5 style={{ fontSize: "6px", textAlign: "center", marginTop: "-5px"}}>
+        Powered by <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </h5>
+      </div>
     </div>
   );
 };
