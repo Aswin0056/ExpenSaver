@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Expenses.css";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-
+// import Sidebar from "./Sidebar";
+import "./Css/Footer.css";
 const Expenses = () => {
   
   const [expenses, setExpenses] = useState([]);
@@ -116,7 +116,7 @@ const Expenses = () => {
   return (
     <div className="expenses-container">
     <Navbar />
-    <Sidebar />
+    {/* <Sidebar /> */}
       <div className="main-content">
         <div className="expenses-content">
           <h2>Expense History</h2>
@@ -214,10 +214,23 @@ const Expenses = () => {
           </table>
         </div>
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
+      <footer className="footer">
+      <div className="footer-links">
+        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <button onClick={() => navigate("/expenses")}>Expenses</button>
+        <button onClick={() => navigate("/income")}>Income</button>
+        <button onClick={() => navigate("/profile")}>Profile</button>
+       
+      </div>
+      <p className="footer-text">
+        © 2025 <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </p>
+    </footer>
+      {/* <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h6>
+      </h6> */}
     </div>
   );
 };

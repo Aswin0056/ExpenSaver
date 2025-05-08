@@ -4,8 +4,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "./Css/Dashboard.css";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-
+// import Sidebar from "./Sidebar";
+import "./Css/Footer.css";
 
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
@@ -103,7 +103,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
     <Navbar />
-    <Sidebar />
+    {/* <Sidebar /> */}
       <div className="main-content">
         <div className="dashboard-content">
           <h2>Welcome to Your Dashboard, {username || "User"}!</h2>
@@ -135,12 +135,26 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "250px"}}>
+      <footer className="footer">
+      <div className="footer-links">
+        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <button onClick={() => navigate("/expenses")}>Expenses</button>
+        <button onClick={() => navigate("/income")}>Income</button>
+        <button onClick={() => navigate("/profile")}>Profile</button>
+       
+      </div>
+      <p className="footer-text">
+        © 2025 <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </p>
+    </footer>
+      {/* <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h6>
+      </h6> */}
     </div>
   );
 };
 
 export default Dashboard;
+

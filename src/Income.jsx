@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Css/Income.css";
 import { FaEdit } from "react-icons/fa";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-
+// import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
+import "./Css/Footer.css";
 const months = [
   "January", "February", "March", "April", "May", "June", 
   "July", "August", "September", "October", "November", "December"
@@ -11,6 +12,7 @@ const months = [
 
 
 const Income = ({ expenses = {} }) => {
+  const navigate = useNavigate();
   const [viewMode, setViewMode] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [amount, setAmount] = useState("");
@@ -27,7 +29,7 @@ const Income = ({ expenses = {} }) => {
   return (
     <div className="expenses-container">
     <Navbar />
-    <Sidebar />
+    {/* <Sidebar /> */}
       <div className="income-bar">
         {viewMode ? (
           <div className="display-income">
@@ -59,10 +61,23 @@ const Income = ({ expenses = {} }) => {
       <div className="main-content">
    
       </div>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
+      <footer className="footer">
+      <div className="footer-links">
+        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <button onClick={() => navigate("/expenses")}>Expenses</button>
+        <button onClick={() => navigate("/income")}>Income</button>
+        <button onClick={() => navigate("/profile")}>Profile</button>
+       
+      </div>
+      <p className="footer-text">
+        © 2025 <strong style={{ color: 'black' }}>Azh</strong>
+        <strong style={{ color: 'goldenrod' }}>Studio</strong>
+      </p>
+    </footer>
+      {/* <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h6>
+      </h6> */}
     </div>
   );
 };
