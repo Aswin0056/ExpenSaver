@@ -1,111 +1,85 @@
-/* Navbar Container */
-.banana-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color:  #6c4f8c;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-/* Logo */
-.apple-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  cursor: pointer;
-}
-
-/* Group for the search bar and profile icon */
-.grape-group {
-  display: flex;
-  align-items: center;
-}
-
-/* Search Bar */
-.mango-input {
-  margin-right: 20px;
-}
-
-.pineapple-input {
-  padding: 8px 12px;
-  font-size: 14px;
+/* === NAVBAR CONTAINER === */
+.nav-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: #dcac59;
   border-radius: 20px;
-  border: none;
-  width: 200px;
-  background-color: white;
-  color: black;
-  transition: all 0.3s ease;
-}
-
-.pineapple-input:focus {
-  outline: none;
-  background-color: rgb(194, 194, 194);
-}
-
-/* Profile Icon */
-.mango-profile {
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  max-width: 95%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   position: relative;
-  cursor: pointer;
-}
-
-/* Profile Icon Color */
-.orange-icon {
-  font-size: 24px;
-  color: #fff;
-  transition: transform 0.3s ease;
-}
-
-.mango-profile:hover .orange-icon {
-  transform: scale(1.1);
-}
-
-/* Dropdown Menu */
-.kiwi-dropdown {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background-color: #444;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 150px;
   z-index: 1000;
 }
 
-.kiwi-dropdown ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* === NAV LINKS === */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
-.kiwi-dropdown li {
-  padding: 10px;
-  cursor: pointer;
+.navbar-links a {
+  text-decoration: none;
   color: white;
-  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
-.kiwi-dropdown li:hover {
-  background-color: #555;
+.navbar-links a:hover {
+  color: goldenrod;
 }
 
-/* Mobile responsiveness */
+/* === TOGGLE BUTTON (MOBILE) === */
+.navbar-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* === DROPDOWN MENU === */
+.navbar-dropdown {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 1rem;
+  width: 160px;
+}
+
+.navbar-dropdown a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+  transition: all 0.25s ease;
+}
+
+.navbar-dropdown a:hover {
+  color: #6c4f8c;
+}
+
+.navbar-dropdown.show {
+  display: flex;
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .banana-bar {
-    flex-direction: column;
-    align-items: flex-start;
+  .navbar-links {
+    display: none;
   }
 
-  .grape-group {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-
-  .pineapple-input {
-    width: 100%;
-    margin-bottom: 10px;
+  .navbar-toggle {
+    display: block;
   }
 }

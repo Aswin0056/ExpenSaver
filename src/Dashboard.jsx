@@ -5,8 +5,6 @@ import { jwtDecode } from "jwt-decode";
 import "./Css/Dashboard.css";
 import Navbar from "./Navbar";
 // import Sidebar from "./Sidebar";
-import "./Css/Footer.css";
-
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
@@ -17,6 +15,7 @@ const Dashboard = () => {
   const [quantity, setQuantity] = useState("");
   const [username, setUsername] = useState("");
   const [lastExpense, setLastExpense] = useState(null);
+  const [sheet, setSheet] = useState("1"); // Default to Sheet 1
   const [error] = useState("");
 
   useEffect(() => {
@@ -46,13 +45,13 @@ const Dashboard = () => {
       console.error("No token found. User not authenticated.");
       return;
     }
-  
+
     try {
       console.log("Fetching last expense...");
       const response = await axios.get(`${API_BASE_URL}/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       console.log("Last Expense Response:", response.data);
       if (response.data.lastExpense) {
         setLastExpense(response.data.lastExpense);
@@ -64,12 +63,11 @@ const Dashboard = () => {
       console.error("Error fetching last expense:", error.response?.data || error);
     }
   };
-  
+
   useEffect(() => {
     fetchLastExpense();
-  }
-);  // Fetch once when the component mounts
-  
+  });
+
   const handleAddExpense = async () => {
     if (!title || !amount) {
       alert("Title and Amount are required!");
@@ -85,7 +83,12 @@ const Dashboard = () => {
     try {
       const res = await axios.post(
         `${API_BASE_URL}/expenses`,
-        { title, amount: parseFloat(amount), quantity: quantity ? parseInt(quantity) : 1 },
+        {
+          title,
+          amount: parseFloat(amount),
+          quantity: quantity ? parseInt(quantity) : 1,
+          sheet: sheet, // ✅ Include selected sheet
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -102,8 +105,8 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-    <Navbar />
-    {/* <Sidebar /> */}
+      <Navbar />
+      {/* <Sidebar /> */}
       <div className="main-content">
         <div className="dashboard-content">
           <h2>Welcome to Your Dashboard, {username || "User"}!</h2>
@@ -126,8 +129,14 @@ const Dashboard = () => {
               </table>
             </div>
           ) : (<p>No expenses added yet.</p>)}
+
           <h3>Add New Expense</h3>
           <div className="expense-form">
+            {/* ✅ Sheet selector */}
+            <select value={sheet} onChange={(e) => setSheet(e.target.value)} className="sheet-dropdown">
+              <option value="1">Sheet 1</option>
+              <option value="2">Sheet 2</option>
+            </select>
             <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
             <input type="number" placeholder="Quantity (optional)" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
@@ -135,26 +144,21 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
       <footer className="footer">
-      <div className="footer-links">
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-        <button onClick={() => navigate("/expenses")}>Expenses</button>
-        <button onClick={() => navigate("/income")}>Income</button>
-        <button onClick={() => navigate("/profile")}>Profile</button>
-       
-      </div>
-      <p className="footer-text">
-        © 2025 <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </p>
-    </footer>
-      {/* <h6 style={{ fontSize: "6px", textAlign: "center", marginLeft: "250px"}}>
-        Powered by <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h6> */}
+        <div className="footer-links">
+          <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+          <button onClick={() => navigate("/expenses")}>Expenses</button>
+          <button onClick={() => navigate("/income")}>Income</button>
+          <button onClick={() => navigate("/profile")}>Profile</button>
+        </div>
+        <p className="footer-text">
+          © 2025 <strong style={{ color: 'black' }}>Azh</strong>
+          <strong style={{ color: 'goldenrod' }}>Studio</strong>
+        </p>
+      </footer>
     </div>
   );
 };
 
 export default Dashboard;
-

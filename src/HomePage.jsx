@@ -1,93 +1,69 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 import "./Css/HomePage.css";
-import { 
-  FaUserPlus, FaSignInAlt, FaPlusCircle, FaEye, FaTasks, 
-  FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPaperPlane 
-} from "react-icons/fa";
+import { FaUserPlus, FaSignInAlt, FaPlusCircle, FaEye, FaTasks } from "react-icons/fa";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+// const REACT_APP_API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  // const [successMessage, setSuccessMessage] = useState("");
+  // const [errorMsg, setErrorMsg] = useState("");
+  const [formData, setFormData] = useState({ name: "", gmail: "", comment: "" });
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [name, setName] = useState("");  // New state for name input
-  const [email, setEmail] = useState("");  // New state for email input
-  const [error, setError] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
 
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        console.log("Fetching comments from:", `${API_BASE_URL}/comments`); // Debugging
-        const response = await axios.get(`${API_BASE_URL}/comments`);
-        console.log("Fetched comments:", response.data); // Debugging
-        setComments(response.data);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-        setError("Error fetching comments.");
-      }
-    };
-  
     fetchComments();
   }, []);
-  
 
-  const handleCommentSubmit = async () => {
-    if (!name || !email || !newComment.trim()) {
-      alert("Please fill in all fields.");
-      return;
-    }
-  
-    const commentData = { name, email, text: newComment };
-    console.log("Sending data:", commentData); // Debugging
-  
+  const fetchComments = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/comments`, commentData);
-      console.log("Response:", response.data);
-      setComments([...comments, response.data]); // Update UI
-      setNewComment("");
-      setName("");
-      setEmail("");
+      const res = await fetch("https://studio-bd.onrender.com/api/get-comments");
+      const data = await res.json();
+      setComments(data.reverse()); // Show latest first
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("https://studio-bd.onrender.com/api/add-comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        // setSuccessMessage("Comment submitted ✅");
+        setFormData({ name: "", gmail: "", comment: "" });
+        fetchComments(); // Refresh comment list
+        // setTimeout(() => setSuccessMessage(""), 3000);
+      } else {
+        // setErrorMsg("Failed to submit comment ❌");
+        // setTimeout(() => setErrorMsg(""), 3000);
+      }
     } catch (error) {
-      console.error("Error submitting comment:", error.response ? error.response.data : error.message);
-      setError("Error submitting comment.");
+      console.error("Error submitting comment:", error);
+      // setErrorMsg("Something went wrong 😢");
+      // setTimeout(() => setErrorMsg(""), 3000);
     }
   };
 
   return (
+  <div>
+  <Navbar />
     <div className="homepage-container">
-      <nav className="navbar">
-      <div className="logo-container">
-        <img
-          src={`${process.env.PUBLIC_URL}/logo192.png`}
-          alt="ExpenSaver Logo"
-          className="homepage-logo"
-        />
-      </div>
-      <div className="nav-buttons">
-        <button className="dropdown-btn" onClick={toggleDropdown}>
-          Menu
-        </button>
-        {dropdownOpen && (
-          <div className="dropdown-menu">
-            <button className="login-btn" onClick={() => navigate("/login")}>
-              Login
-            </button>
-            <button className="register-btn" onClick={() => navigate("/register")}>
-              Register
-            </button>
-          </div>
-        )}
-      </div>
-    </nav>
+      
       {/* <img src={`${process.env.PUBLIC_URL}/Banner.webp`} alt="logo" className="banner" /> */}
       <div className="content-container">
         <div className="left-section">
@@ -111,117 +87,50 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Comment Section */}
-      <div className="comment-section">
-        <h3>Leave a Comment</h3>
-        <input
-          type="text"
-          className="gmail-input"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          className="gmail-input"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <textarea
-          className="comment-input"
-          placeholder="Write your comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        />
-        <button className="comment-submit" onClick={handleCommentSubmit}>
-          <FaPaperPlane /> Submit
-        </button>
-        {error && <p className="error-message">{error}</p>}
-
-        <div className="comments-container">
-          {comments.length === 0 ? (
-            <p>No comments yet. Be the first to comment!</p>
-          ) : (
-            comments.map((comment, index) => (
-              <div key={index} className="comment-item">
-                <p><img src={`${process.env.PUBLIC_URL}/users-logo.png`} alt="logo" className="users-logo" /><strong>{comment.name}</strong></p>
-                <p>{comment.text}</p>
-                <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
-              </div>
-            ))
-          )}
+        {/* DOWNLOAD CARD */}
+        <div className="download-card">
+          <h3 style={{color:"goldenrod"}}>📱 Download Our App</h3>
+          <p>Take Quotes Gram on the go. Available now on mobile platforms!</p>
+          <a
+            href="https://azhstudioofficial.online/download"
+            className="download-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🚀 Download Now
+          </a>
         </div>
+
+       {/* 💬 Comments Section */}
+      <div className="comments-section" style={{ marginTop: "3rem", maxWidth: "600px", marginInline: "auto" }}>
+        <h3 style={{color:"goldenrod"}}>💬 Comments</h3>
+        {comments.length === 0 ? (
+          <p>No comments yet.</p>
+        ) : (
+          comments.map((comment, index) => (
+            <div key={index} style={{ padding: "1rem", marginBottom: "1rem", textAlign: "left" }}>
+              <img src={`${process.env.PUBLIC_URL}/users-logo.png`} alt="logo" className="users-logo" />
+              <p className="comment-name" style={{ marginBottom: "0.25rem" }}><strong>{comment.name}</strong></p>
+              <p style={{ color: "#555", fontSize: "0.8rem", marginLeft: "10px" }}>{comment.comment}</p>
+            </div>
+          ))
+        )}
       </div>
 
-      <a
-      className="download-section"
-  href="/app-debug.apk"
-  download
-  style={{
-    padding: '10px 20px',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    textDecoration: 'none',
-    borderRadius: '8px'
-  }}
->
-  📱 Download Android App (APK)
-</a>
-
-
-<footer className="footer-home">
-  <div className="footer-container-home">
-  <div>
-    <div className="footer-section-home">
-      <h4>About</h4>
-      <p>ExpenSaver is a personal finance tracker that helps users manage their daily expenses efficiently.</p>
-    </div>
-
-    <div className="footer-section-home">
-      <h4>Contact</h4>
-      <p>Email: <a href="mailto:support@expensaver.com">support@expensaver.com</a></p>
-      <p>Phone: <a href="tel:+1234567890">78250 . . . . .</a></p>
-    </div>
-</div>
- <div>
-    <div className="footer-section-home">
-      <h4>Owner</h4>
-      <p>
-        Powered by <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </p>
-      <h5>
-        <a className="more-info" href="/ownerinfo">More Info</a>
-      </h5>
-    </div>
-</div>
-<div>
-    <div className="footer-section-home">
-      <h4>User Guide</h4>
-      <p><a href="/user-guide">Click here to learn how to use ExpenSaver</a></p>
-    </div>
-
-    <div className="footer-section-home social-media">
-      <h4>Follow Us</h4>
-      <div className="social-icons">
-        <a href="https://www.facebook.com/share/15RVuyQBmi/" target="_blank" rel="noopener noreferrer">
-          <FaFacebook />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <FaTwitter />
-        </a>
-        <a href="https://www.instagram.com/azhvn.ix?igsh=MXg4b25vMDV1MGdxag==" target="_blank" rel="noopener noreferrer">
-          <FaInstagram />
-        </a>
-        <a href="https://in.linkedin.com/in/aswin-i-1543b0259?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin />
-        </a>
+      {/* 📝 Comment Form */}
+      <div className="comment-box" style={{ marginTop: "2rem" }}>
+        <h3>Leave a Comment</h3>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
+          <input type="email" name="gmail" placeholder="Your Gmail" value={formData.gmail} onChange={handleChange} required />
+          <textarea name="comment" placeholder="Your Comment" rows="4" value={formData.comment} onChange={handleChange} required />
+          <button type="submit">Submit Comment</button>
+        </form>
       </div>
+
+
     </div>
-    </div>
-  </div>
-</footer>
+    <Footer />
     </div>
   );
 };

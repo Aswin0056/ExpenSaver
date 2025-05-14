@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Css/Register.css";
+import Navbar from "./Navbar";
 
 const Register = () => {
   const [username, setUsername] = useState(""); // ✅ Username State
@@ -44,6 +45,8 @@ const Register = () => {
   };
 
   return (
+    <div>
+    <Navbar />
     <div className="register-container">
       {showNotification && (
         <div className="notification">
@@ -51,7 +54,7 @@ const Register = () => {
         </div>
       )}
 
-      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="register-logo" />
+      {/* <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="logo" className="register-logo" /> */}
       <div className="register-box">
         <h2>Register</h2>
         <form onSubmit={handleRegister}>
@@ -93,11 +96,12 @@ const Register = () => {
           </button>
         </p>
       </div>
-      <h6 style={{ color: 'grey', fontSize: "8px", textAlign: "center" }}>Developed By Aswin</h6>
-      <h6 style={{ fontSize: "6px", textAlign: "center", marginTop: "-10px" }}>
+      {/* <h6 style={{ color: 'grey', fontSize: "8px", textAlign: "center" }}>Developed By Aswin</h6> */}
+      <h6 style={{ fontSize: "6px", textAlign: "center", marginTop: "5px" }}>
         Powered by <strong style={{ color: 'black' }}>Azh</strong>
         <strong style={{ color: 'goldenrod' }}>Studio</strong>
       </h6>
+    </div>
     </div>
   );
 };

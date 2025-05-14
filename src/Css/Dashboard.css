@@ -10,21 +10,21 @@ body {
   min-height: 100vh;
 }
 
-/* Main Content */
 .main-content {
   margin-top: 100px;
   display: flex;
-
 }
 
 .dashboard-content {
   flex: 1;
   text-align: center;
   padding: 30px;
+    margin-left: -240px;
+
 }
 
 .add-button {
-  background-color:  #6c4f8c;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
   color: white;
   border: none;
   padding: 8px 15px;
@@ -34,12 +34,12 @@ body {
 }
 
 .add-button:hover {
-  background-color: rgb(81, 59, 85);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
 }
 
 .logout-button {
   background-color: #dc3545;
-  color: white;
+  color: black;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
@@ -49,27 +49,6 @@ body {
 
 .logout-button:hover {
   background-color: #c82333;
-}
-
-/* Footer Styling */
-.footer {
-  color: black;
-  padding: 12px;
-  font-size: 14px;
-  bottom: 0;
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #a8a8a8;
-  text-align: center;
-  margin-top: auto;
-  z-index: 1000;
-}
-
-.cursive {
-  font-family: cursive;
-}
-
-.designed {
-  font-size: 10px;
 }
 
 .content {
@@ -91,7 +70,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
-  background: white;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png');
   border-radius: 8px;
   overflow: hidden;
 }
@@ -104,7 +83,7 @@ body {
 }
 
 .expense-table th {
-  background-color: rgb(81, 59, 85);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
   color: white;
 }
 
@@ -119,6 +98,7 @@ body {
 /* Add Expense Table */
 .add-expense-table {
   width: 100%;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png');
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -131,7 +111,7 @@ body {
 }
 
 .add-expense-table th {
-  background-color: rgb(81, 59, 85);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
   color: white;
 }
 
@@ -147,13 +127,13 @@ body {
   border-color: rgb(81, 59, 85);
 }
 
-/* Expense Form Container */
+/* Expense Form */
 .expense-form {
   width: 90%;
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
-  background: rgb(238, 233, 233);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png');
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.493);
   border-radius: 8px;
   text-align: center;
@@ -172,7 +152,7 @@ body {
 
 .expense-form button {
   width: 100%;
-  background: rgb(81, 59, 85);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
   color: white;
   font-size: 14px;
   border: none;
@@ -182,7 +162,7 @@ body {
 }
 
 .expense-form button:hover {
-  background: #0056b3;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
 }
 
 /* Responsive Design */
@@ -195,17 +175,10 @@ body {
 }
 
 @media (max-width: 768px) {
-
-
   .expense-table th,
   .expense-table td {
     padding: 6px;
     font-size: 12px;
-  }
-
-  .footer {
-    font-size: 12px;
-    padding: 10px;
   }
 
   .search-input {
@@ -214,7 +187,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .main-content{
+  .main-content {
     width: 80%;
     padding-left: 60px;
   }
@@ -234,7 +207,6 @@ body {
   }
 
   .expense-form {
-    display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
@@ -269,10 +241,58 @@ body {
   .addx-button:hover {
     background: #0056b3;
   }
+}
 
+
+/* Footer Styling */
+.footer {
+  color: white;
+  padding: 16px;
+  font-size: 14px;
+  bottom: 0;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
+  text-align: center;
+  margin-top: auto;
+  /* z-index: 1000; */
+  /* position: absolute; */
+  width: 100%;
+  /* height: 80px; */
+  margin-bottom: -50px;
+}
+
+.cursive {
+  font-family: cursive;
+}
+
+.designed {
+  font-size: 10px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: -150px;
+    position: fixed;
+  }
+
+}
+
+@media (max-width: 480px) {
   .footer {
     font-size: 10px;
     padding: 8px;
+    /* margin-bottom: -50px; */
   }
 }
 
+
+.sheet-dropdown {
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+ 

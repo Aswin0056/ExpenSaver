@@ -1,5 +1,5 @@
 .register-container {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -13,6 +13,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 350px;
     text-align: center;
+    margin-left: 450px;
   }
 
   .register-logo{
@@ -30,7 +31,7 @@
   
   .register-button {
     width: 100%;
-    background-color: rgb(81, 59, 85);
+    background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, black 40%, grey 55% );
     color: white;
     padding: 10px;
     border: none;
@@ -40,7 +41,7 @@
   }
   
   .register-button:hover {
-    background-color:  rgba(81, 59, 85, 0.63);
+    background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(15deg, grey 40%, black 55%);
   }
   
   p {
@@ -56,12 +57,14 @@
   .register-container {
     padding: 20px;
     flex-direction: column;
-    height: 90vh;
+    height: 50vh;
   }
 
   .register-box {
     width: 90%;
     padding: 15px;
+    margin-left: 0px;
+    margin-left: 60px;
   }
 
   h2 {

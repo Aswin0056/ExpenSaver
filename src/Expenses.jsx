@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Css/Expenses.css";
 import Navbar from "./Navbar";
-// import Sidebar from "./Sidebar";
-import "./Css/Footer.css";
+
 const Expenses = () => {
-  
-  const [expenses, setExpenses] = useState([]);
+  const [sheets, setSheets] = useState([{ name: "Sheet 1", expenses: [] }]);
+  const [currentSheetIndex, setCurrentSheetIndex] = useState(0);
   const [editingExpense, setEditingExpense] = useState(null);
   const [filter, setFilter] = useState("all");
   const [filterDate, setFilterDate] = useState("");
@@ -17,7 +16,6 @@ const Expenses = () => {
 
   useEffect(() => {
     if (!token) {
-      console.error("No auth token found. Redirecting to login...");
       navigate("/login");
       return;
     }
@@ -28,12 +26,9 @@ const Expenses = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log("Expenses Fetched:", res.data);
-        setExpenses(res.data);
+        setSheets([{ name: "Sheet 1", expenses: res.data }]);
       } catch (err) {
-        console.error("Error fetching expenses:", err.response?.data?.error || err.message);
         if (err.response?.status === 401) {
-          console.log("Unauthorized! Redirecting to login...");
           localStorage.removeItem("authToken");
           navigate("/login");
         }
@@ -45,25 +40,15 @@ const Expenses = () => {
     const handleExpenseAdded = () => fetchExpenses();
     window.addEventListener("expenseAdded", handleExpenseAdded);
 
-    return () => {
-      window.removeEventListener("expenseAdded", handleExpenseAdded);
-    };
+    return () => window.removeEventListener("expenseAdded", handleExpenseAdded);
   }, [navigate, token]);
-
-  const grandTotal = expenses.reduce(
-    (total, expense) => total + expense.amount * (expense.quantity || 1),
-    0
-  );
 
   const handleEdit = (expense) => {
     setEditingExpense({ ...expense });
   };
 
   const handleInputChange = (e, field) => {
-    setEditingExpense((prevExpense) => ({
-      ...prevExpense,
-      [field]: e.target.value,
-    }));
+    setEditingExpense((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const handleUpdate = async () => {
@@ -75,14 +60,15 @@ const Expenses = () => {
         editingExpense,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setExpenses((prevExpenses) =>
-        prevExpenses.map((exp) =>
-          exp.id === editingExpense.id ? editingExpense : exp
-        )
+
+      const updatedExpenses = sheets[currentSheetIndex].expenses.map((exp) =>
+        exp.id === editingExpense.id ? editingExpense : exp
       );
+
+      updateCurrentSheetExpenses(updatedExpenses);
       setEditingExpense(null);
     } catch (err) {
-      console.error("Error updating expense:", err.response?.data?.error);
+      console.error("Error updating expense:", err);
     }
   };
 
@@ -93,13 +79,26 @@ const Expenses = () => {
       await axios.delete(`https://es-backend-1.onrender.com/delete-expense/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setExpenses((prevExpenses) => prevExpenses.filter((exp) => exp.id !== id));
+
+      const filtered = sheets[currentSheetIndex].expenses.filter((exp) => exp.id !== id);
+      updateCurrentSheetExpenses(filtered);
     } catch (err) {
-      console.error("Error deleting expense:", err.response?.data?.error);
+      console.error("Error deleting expense:", err);
     }
   };
 
-  const filteredExpenses = expenses.filter((expense) => {
+  const updateCurrentSheetExpenses = (newExpenses) => {
+    const newSheets = [...sheets];
+    newSheets[currentSheetIndex].expenses = newExpenses;
+    setSheets(newSheets);
+  };
+
+  const addNewSheet = () => {
+    setSheets((prev) => [...prev, { name: `Sheet ${prev.length + 1}`, expenses: [] }]);
+    setCurrentSheetIndex(sheets.length);
+  };
+
+  const filteredExpenses = sheets[currentSheetIndex].expenses.filter((expense) => {
     const expenseDate = new Date(expense.created_at);
     if (filter === "date" && filterDate) {
       return expenseDate.toISOString().split("T")[0] === filterDate;
@@ -113,14 +112,34 @@ const Expenses = () => {
     return true;
   });
 
+  const grandTotal = filteredExpenses.reduce(
+    (total, exp) => total + exp.amount * (exp.quantity || 1),
+    0
+  );
+
   return (
     <div className="expenses-container">
-    <Navbar />
-    {/* <Sidebar /> */}
+      <Navbar />
+
       <div className="main-content">
         <div className="expenses-content">
-          <h2>Expense History</h2>
-          
+          <div className="header">
+            <h2>Expense History - {sheets[currentSheetIndex].name}</h2>
+            <button className="add-sheet" onClick={addNewSheet}>+ Add Sheet</button>
+          </div>
+
+          <div className="sheet-tabs">
+            {sheets.map((sheet, index) => (
+              <button
+                key={index}
+                className={`sheet-tab ${index === currentSheetIndex ? "active" : ""}`}
+                onClick={() => setCurrentSheetIndex(index)}
+              >
+                {sheet.name}
+              </button>
+            ))}
+          </div>
+
           <div className="filter-bar">
             <select value={filter} onChange={(e) => setFilter(e.target.value)}>
               <option value="all">All</option>
@@ -128,21 +147,13 @@ const Expenses = () => {
               <option value="month">Filter by Month</option>
             </select>
             {filter === "date" && (
-              <input
-                type="date"
-                value={filterDate}
-                onChange={(e) => setFilterDate(e.target.value)}
-              />
+              <input type="date" value={filterDate} onChange={(e) => setFilterDate(e.target.value)} />
             )}
             {filter === "month" && (
-              <input
-                type="month"
-                value={filterMonth}
-                onChange={(e) => setFilterMonth(e.target.value)}
-              />
+              <input type="month" value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)} />
             )}
           </div>
-          
+
           <table className="expense-table">
             <thead>
               <tr>
@@ -159,34 +170,14 @@ const Expenses = () => {
                 <tr key={expense.id}>
                   {editingExpense?.id === expense.id ? (
                     <>
+                      <td><input type="text" value={editingExpense.title} onChange={(e) => handleInputChange(e, "title")} /></td>
+                      <td><input type="number" value={editingExpense.amount} onChange={(e) => handleInputChange(e, "amount")} /></td>
+                      <td><input type="number" value={editingExpense.quantity || ""} onChange={(e) => handleInputChange(e, "quantity")} /></td>
+                      <td>{(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}</td>
+                      <td>{new Date(editingExpense.created_at).toLocaleString()}</td>
                       <td>
-                        <input
-                          type="text"
-                          value={editingExpense.title}
-                          onChange={(e) => handleInputChange(e, "title")}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="number"
-                          value={editingExpense.amount}
-                          onChange={(e) => handleInputChange(e, "amount")}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="number"
-                          value={editingExpense.quantity || ""}
-                          onChange={(e) => handleInputChange(e, "quantity")}
-                        />
-                      </td>
-                      <td>
-                        {(editingExpense.amount * (editingExpense.quantity || 1)).toFixed(2)}
-                      </td>
-                      <td>{new Date(editingExpense?.created_at).toLocaleString()}</td>
-                      <td className="action-button">
-                        <button className="update-button" onClick={handleUpdate}>Update</button>
-                        <button className="cancel-button" onClick={() => setEditingExpense(null)}>Cancel</button>
+                        <button onClick={handleUpdate}>Update</button>
+                        <button onClick={() => setEditingExpense(null)}>Cancel</button>
                       </td>
                     </>
                   ) : (
@@ -196,9 +187,9 @@ const Expenses = () => {
                       <td>{expense.quantity || "-"}</td>
                       <td>{(expense.amount * (expense.quantity || 1)).toFixed(2)}</td>
                       <td>{new Date(expense.created_at).toLocaleString()}</td>
-                      <td className="action-button">
-                        <button className="edit-button" onClick={() => handleEdit(expense)}>Edit</button>
-                        <button className="delete-button" onClick={() => handleDelete(expense.id)}>Delete</button>
+                      <td>
+                        <button onClick={() => handleEdit(expense)}>Edit</button>
+                        <button onClick={() => handleDelete(expense.id)}>Delete</button>
                       </td>
                     </>
                   )}
@@ -207,30 +198,25 @@ const Expenses = () => {
               <tr className="grand-total-row">
                 <td colSpan="3"><strong>Grand Total</strong></td>
                 <td><strong>₹ {grandTotal.toFixed(2)}</strong></td>
-                <td></td>
-                <td></td>
+                <td colSpan="2"></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
       <footer className="footer">
-      <div className="footer-links">
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-        <button onClick={() => navigate("/expenses")}>Expenses</button>
-        <button onClick={() => navigate("/income")}>Income</button>
-        <button onClick={() => navigate("/profile")}>Profile</button>
-       
-      </div>
-      <p className="footer-text">
-        © 2025 <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </p>
-    </footer>
-      {/* <h6 style={{ fontSize: "6px", textAlign: "center", marginRight: "250px"}}>
-        Powered by <strong style={{ color: 'black' }}>Azh</strong>
-        <strong style={{ color: 'goldenrod' }}>Studio</strong>
-      </h6> */}
+        <div className="footer-links">
+          <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+          <button onClick={() => navigate("/expenses")}>Expenses</button>
+          <button onClick={() => navigate("/income")}>Income</button>
+          <button onClick={() => navigate("/profile")}>Profile</button>
+        </div>
+        <p className="footer-text">
+          © 2025 <strong style={{ color: 'black' }}>Azh</strong>
+          <strong style={{ color: 'goldenrod' }}>Studio</strong>
+        </p>
+      </footer>
     </div>
   );
 };
